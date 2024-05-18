@@ -1,4 +1,4 @@
-# Install script for directory: E:/homework/CG/openGL
+# Install script for directory: E:/openGL-ex2/openGL
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "E:/homework/CG/openGL/cmake-build-debug-mingw/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "E:/openGL-ex2/openGL/cmake-build-debug-mingw/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

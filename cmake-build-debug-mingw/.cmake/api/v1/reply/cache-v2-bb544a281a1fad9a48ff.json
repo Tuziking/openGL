@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "e:/homework/CG/openGL/cmake-build-debug-mingw"
+			"value" : "e:/openGL-ex2/openGL/cmake-build-debug-mingw"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -575,7 +575,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/homework/CG/openGL/cmake-build-debug-mingw/CMakeFiles/pkgRedirects"
+			"value" : "E:/openGL-ex2/openGL/cmake-build-debug-mingw/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -647,7 +647,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "E:/homework/CG/openGL"
+			"value" : "E:/openGL-ex2/openGL"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1291,7 +1291,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/homework/CG/openGL/cmake-build-debug-mingw"
+			"value" : "E:/openGL-ex2/openGL/cmake-build-debug-mingw"
 		},
 		{
 			"name" : "openGL_IS_TOP_LEVEL",
@@ -1315,7 +1315,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "E:/homework/CG/openGL"
+			"value" : "E:/openGL-ex2/openGL"
 		}
 	],
 	"kind" : "cache",

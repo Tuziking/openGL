@@ -1,3 +1,3 @@
-E:/homework/CG/openGL/cmake-build-debug-mingw/CMakeFiles/openGL.dir
-E:/homework/CG/openGL/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
-E:/homework/CG/openGL/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir
+E:/openGL-ex2/openGL/cmake-build-debug-mingw/CMakeFiles/openGL.dir
+E:/openGL-ex2/openGL/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
+E:/openGL-ex2/openGL/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir

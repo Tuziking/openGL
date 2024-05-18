@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = E$:/homework/CG/openGL/cmake-build-debug-mingw/
+cmake_ninja_workdir = E$:/openGL-ex2/openGL/cmake-build-debug-mingw/
 # =============================================================================
 # Object build statements for EXECUTABLE target openGL
 
@@ -49,68 +49,86 @@ cmake_ninja_workdir = E$:/homework/CG/openGL/cmake-build-debug-mingw/
 
 build cmake_object_order_depends_target_openGL: phony || CMakeFiles/openGL.dir
 
-build CMakeFiles/openGL.dir/src/glad.c.obj: C_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/src/glad.c || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/src/glad.c.obj: C_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/src/glad.c || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\src\glad.c.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/main.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/main.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/main.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/main.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/include/imgUI/imgui.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/include/imgUI/imgui_demo.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_demo.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_demo.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/include/imgUI/imgui_draw.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_draw.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_draw.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/include/imgUI/imgui_impl_glfw.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_impl_glfw.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_impl_glfw.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/include/imgUI/imgui_impl_opengl3.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_impl_opengl3.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_impl_opengl3.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/include/imgUI/imgui_tables.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_tables.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_tables.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/homework/CG/openGL/include/imgUI/imgui_widgets.cpp || cmake_object_order_depends_target_openGL
+build CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_widgets.cpp || cmake_object_order_depends_target_openGL
   DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_widgets.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IE:/homework/CG/openGL/include
+  INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
+  TARGET_PDB = openGL.pdb
 
 
 # =============================================================================
@@ -120,22 +138,23 @@ build CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj: CXX_COMPILER__o
 #############################################
 # Link the executable openGL.exe
 
-build openGL.exe: CXX_EXECUTABLE_LINKER__openGL_Debug CMakeFiles/openGL.dir/src/glad.c.obj CMakeFiles/openGL.dir/main.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj | E$:/homework/CG/openGL/lib/glfw3.dll E$:/homework/CG/openGL/lib/libassimp-5.dll
+build openGL.exe: CXX_EXECUTABLE_LINKER__openGL_Debug CMakeFiles/openGL.dir/src/glad.c.obj CMakeFiles/openGL.dir/main.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj | E$:/openGL-ex2/openGL/lib/glfw3.dll E$:/openGL-ex2/openGL/lib/libassimp-5.dll
   FLAGS = -g
-  LINK_LIBRARIES = E:/homework/CG/openGL/lib/glfw3.dll  E:/homework/CG/openGL/lib/libassimp-5.dll  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = E:/openGL-ex2/openGL/lib/glfw3.dll  E:/openGL-ex2/openGL/lib/libassimp-5.dll  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\openGL.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
+  TARGET_COMPILE_PDB = CMakeFiles\openGL.dir\
   TARGET_FILE = openGL.exe
   TARGET_IMPLIB = libopenGL.dll.a
-  TARGET_PDB = openGL.exe.dbg
+  TARGET_PDB = openGL.pdb
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D E:\homework\CG\openGL\cmake-build-debug-mingw && E:\CLion\bin\cmake\win\x64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D E:\openGL-ex2\openGL\cmake-build-debug-mingw && E:\CLion\bin\cmake\win\x64\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -146,7 +165,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D E:\homework\CG\openGL\cmake-build-debug-mingw && E:\CLion\bin\cmake\win\x64\bin\cmake.exe --regenerate-during-build -SE:\homework\CG\openGL -BE:\homework\CG\openGL\cmake-build-debug-mingw"
+  COMMAND = C:\Windows\system32\cmd.exe /C "cd /D E:\openGL-ex2\openGL\cmake-build-debug-mingw && E:\CLion\bin\cmake\win\x64\bin\cmake.exe --regenerate-during-build -SE:\openGL-ex2\openGL -BE:\openGL-ex2\openGL\cmake-build-debug-mingw"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -164,7 +183,7 @@ build openGL: phony openGL.exe
 # =============================================================================
 
 #############################################
-# Folder: E:/homework/CG/openGL/cmake-build-debug-mingw
+# Folder: E:/openGL-ex2/openGL/cmake-build-debug-mingw
 
 build all: phony openGL.exe
 
@@ -175,14 +194,14 @@ build all: phony openGL.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeRCCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake E$:/homework/CG/openGL/CMakeLists.txt
+build build.ninja: RERUN_CMAKE | CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeRCCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCCompilerABI.c E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCompilerIdDetection.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompileFeatures.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineRCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeFindBinUtils.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCCompiler.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystem.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestRCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/ADSP-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/ARMCC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/ARMClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/AppleClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Borland-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Bruce-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Compaq-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Cray-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CrayClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Embarcadero-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Fujitsu-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GHS-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-FindBinUtils.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/HP-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/HP-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IAR-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Intel-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/LCC-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/MSVC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/NVHPC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/NVIDIA-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/OrangeC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/PGI-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/PathScale-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SCO-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SDCC-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SunPro-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/TI-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Tasking-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Watcom-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XL-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XL-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XLClang-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/zOS-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Internal/FeatureTesting.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Determine-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake E$:/openGL-ex2/openGL/CMakeLists.txt
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeRCCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake E$:/homework/CG/openGL/CMakeLists.txt: phony
+build CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeRCCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCCompilerABI.c E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCompilerIdDetection.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompileFeatures.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineRCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeFindBinUtils.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCCompiler.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeRCInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystem.cmake.in E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeTestRCCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/ADSP-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/ARMCC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/ARMClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/AppleClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Borland-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Bruce-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Compaq-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Cray-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/CrayClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Embarcadero-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Fujitsu-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GHS-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU-FindBinUtils.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/HP-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/HP-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IAR-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMClang-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Intel-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/LCC-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/MSVC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/NVHPC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/NVIDIA-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/OrangeC-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/PGI-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/PathScale-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SCO-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SDCC-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SunPro-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/TI-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Tasking-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/Watcom-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XL-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XL-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XLClang-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/zOS-C-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Internal/FeatureTesting.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Determine-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-C.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX-ABI.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU-CXX.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-GNU.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-Initialize.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows-windres.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/Windows.cmake E$:/CLion/bin/cmake/win/x64/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake E$:/openGL-ex2/openGL/CMakeLists.txt: phony
 
 
 #############################################

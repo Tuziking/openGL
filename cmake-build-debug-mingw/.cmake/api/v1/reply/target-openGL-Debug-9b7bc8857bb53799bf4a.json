@@ -59,7 +59,7 @@
 			[
 				{
 					"backtrace" : 3,
-					"path" : "E:/homework/CG/openGL/include"
+					"path" : "E:/openGL-ex2/openGL/include"
 				}
 			],
 			"language" : "C",
@@ -79,7 +79,7 @@
 			[
 				{
 					"backtrace" : 3,
-					"path" : "E:/homework/CG/openGL/include"
+					"path" : "E:/openGL-ex2/openGL/include"
 				}
 			],
 			"language" : "CXX",
@@ -119,12 +119,12 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "E:\\homework\\CG\\openGL\\lib\\glfw3.dll",
+				"fragment" : "E:\\openGL-ex2\\openGL\\lib\\glfw3.dll",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "E:\\homework\\CG\\openGL\\lib\\libassimp-5.dll",
+				"fragment" : "E:\\openGL-ex2\\openGL\\lib\\libassimp-5.dll",
 				"role" : "libraries"
 			},
 			{
