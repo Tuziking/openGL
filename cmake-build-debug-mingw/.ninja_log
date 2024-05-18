@@ -1,0 +1,17 @@
+# ninja log v5
+3	293	7377462095835680	build.ninja	90845a28da031a4f
+8	3039	7377460691058382	CMakeFiles/openGL.dir/main.cpp.obj	c1d831507dbc135a
+3408	3900	7377460699615679	openGL.exe	fcd7be17633796c
+5	1014	7373076910253060	CMakeFiles/openGL.dir/src/glad.c.obj	3fde96e25aa810e9
+14	1695	7377460677581389	CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj	ea19315308ed250f
+7	1315	7373104624585867	CMakeFiles/openGL.dir/include/Mesh.cpp.obj	9a716dc49f853ffd
+10	1366	7373114474177663	CMakeFiles/openGL.dir/include/mesh.cpp.obj	4368d443b20410aa
+30	2024	7377460680896009	CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj	4d01bd619d22a419
+18	2503	7377460685689745	CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj	bd9dcb30f32dbd6e
+35	2734	7377460687989866	CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj	f6d9b36c93aa631b
+22	2255	7377460683222673	CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj	b18adeb74e61e714
+11	3408	7377460694710377	CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj	5d5babf073c64136
+25	1549	7377460676113591	CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj	4d2df3f36ea9fe8e
+2	241	7377462095835680	build.ninja	90845a28da031a4f
+7	2216	7377462558326607	CMakeFiles/openGL.dir/main.cpp.obj	c1d831507dbc135a
+2217	2661	7377462562743548	openGL.exe	fcd7be17633796c
