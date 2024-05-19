@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="openGL"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="F:/openGL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="openGL">
+				<Option output="F:/openGL/cmake-build-debug/openGL.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/openGL/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="F:/openGL/include"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 openGL"/>
+					<CompileFile command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="openGL/fast">
+				<Option output="F:/openGL/cmake-build-debug/openGL.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/openGL/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="F:/openGL/include"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="F:/CLion 2024.1.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 openGL/fast"/>
+					<CompileFile command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="F:/openGL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="F:/openGL/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/CLion 2024.1.1/bin/mingw/bin/mingw32-make.exe -f &quot;F:/openGL/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="F:/openGL/Shaders/1.1.depth_testing.vs">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/GameFrame .h">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui.h">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_demo.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_draw.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_impl_glfw.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_impl_glfw.h">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_impl_opengl3.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_impl_opengl3.h">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_tables.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/include/imgUI/imgui_widgets.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/main.cpp">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/src/glad.c">
+			<Option target="openGL"/>
+		</Unit>
+		<Unit filename="F:/openGL/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
