@@ -63,54 +63,54 @@ build CMakeFiles/openGL.dir/main.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E
   OBJECT_DIR = CMakeFiles\openGL.dir
   OBJECT_FILE_DIR = CMakeFiles\openGL.dir
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui.cpp || cmake_object_order_depends_target_openGL
-  DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui.cpp.obj.d
+build CMakeFiles/openGL.dir/include/imgui/imgui.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgui/imgui.cpp || cmake_object_order_depends_target_openGL
+  DEP_FILE = CMakeFiles\openGL.dir\include\imgui\imgui.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
-  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgui
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_demo.cpp || cmake_object_order_depends_target_openGL
-  DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_demo.cpp.obj.d
+build CMakeFiles/openGL.dir/include/imgui/imgui_demo.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgui/imgui_demo.cpp || cmake_object_order_depends_target_openGL
+  DEP_FILE = CMakeFiles\openGL.dir\include\imgui\imgui_demo.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
-  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgui
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_draw.cpp || cmake_object_order_depends_target_openGL
-  DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_draw.cpp.obj.d
+build CMakeFiles/openGL.dir/include/imgui/imgui_draw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgui/imgui_draw.cpp || cmake_object_order_depends_target_openGL
+  DEP_FILE = CMakeFiles\openGL.dir\include\imgui\imgui_draw.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
-  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgui
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_impl_glfw.cpp || cmake_object_order_depends_target_openGL
-  DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_impl_glfw.cpp.obj.d
+build CMakeFiles/openGL.dir/include/imgui/imgui_impl_glfw.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgui/imgui_impl_glfw.cpp || cmake_object_order_depends_target_openGL
+  DEP_FILE = CMakeFiles\openGL.dir\include\imgui\imgui_impl_glfw.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
-  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgui
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_impl_opengl3.cpp || cmake_object_order_depends_target_openGL
-  DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_impl_opengl3.cpp.obj.d
+build CMakeFiles/openGL.dir/include/imgui/imgui_impl_opengl3.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgui/imgui_impl_opengl3.cpp || cmake_object_order_depends_target_openGL
+  DEP_FILE = CMakeFiles\openGL.dir\include\imgui\imgui_impl_opengl3.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
-  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgui
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_tables.cpp || cmake_object_order_depends_target_openGL
-  DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_tables.cpp.obj.d
+build CMakeFiles/openGL.dir/include/imgui/imgui_tables.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgui/imgui_tables.cpp || cmake_object_order_depends_target_openGL
+  DEP_FILE = CMakeFiles\openGL.dir\include\imgui\imgui_tables.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
-  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgui
 
-build CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgUI/imgui_widgets.cpp || cmake_object_order_depends_target_openGL
-  DEP_FILE = CMakeFiles\openGL.dir\include\imgUI\imgui_widgets.cpp.obj.d
+build CMakeFiles/openGL.dir/include/imgui/imgui_widgets.cpp.obj: CXX_COMPILER__openGL_unscanned_Debug E$:/openGL-ex2/openGL/include/imgui/imgui_widgets.cpp || cmake_object_order_depends_target_openGL
+  DEP_FILE = CMakeFiles\openGL.dir\include\imgui\imgui_widgets.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -IE:/openGL-ex2/openGL/include
   OBJECT_DIR = CMakeFiles\openGL.dir
-  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgUI
+  OBJECT_FILE_DIR = CMakeFiles\openGL.dir\include\imgui
 
 
 # =============================================================================
@@ -120,7 +120,7 @@ build CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj: CXX_COMPILER__o
 #############################################
 # Link the executable openGL.exe
 
-build openGL.exe: CXX_EXECUTABLE_LINKER__openGL_Debug CMakeFiles/openGL.dir/src/glad.c.obj CMakeFiles/openGL.dir/main.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj | E$:/openGL-ex2/openGL/lib/glfw3.dll E$:/openGL-ex2/openGL/lib/libassimp-5.dll
+build openGL.exe: CXX_EXECUTABLE_LINKER__openGL_Debug CMakeFiles/openGL.dir/src/glad.c.obj CMakeFiles/openGL.dir/main.cpp.obj CMakeFiles/openGL.dir/include/imgui/imgui.cpp.obj CMakeFiles/openGL.dir/include/imgui/imgui_demo.cpp.obj CMakeFiles/openGL.dir/include/imgui/imgui_draw.cpp.obj CMakeFiles/openGL.dir/include/imgui/imgui_impl_glfw.cpp.obj CMakeFiles/openGL.dir/include/imgui/imgui_impl_opengl3.cpp.obj CMakeFiles/openGL.dir/include/imgui/imgui_tables.cpp.obj CMakeFiles/openGL.dir/include/imgui/imgui_widgets.cpp.obj | E$:/openGL-ex2/openGL/lib/glfw3.dll E$:/openGL-ex2/openGL/lib/libassimp-5.dll
   FLAGS = -g
   LINK_LIBRARIES = E:/openGL-ex2/openGL/lib/glfw3.dll  E:/openGL-ex2/openGL/lib/libassimp-5.dll  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\openGL.dir

@@ -11,26 +11,21 @@
 
 #include <iostream>
 
-
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
+#include "imgUI/imgui.h"
+#include "imgUI/imgui_impl_glfw.h"
+#include "imgUI/imgui_impl_opengl3.h"
+#include "UI/GUI.h"
+#include "imgUI/imgui_internal.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
 
-//当用户改变窗口的大小的时候，视口也应该被调整。我们可以对窗口注册一个回调函数，它会在每次窗口大小被调整的时候被调用。
-//其实我把教程的这个函数删掉对结果也没有影响，不过教程说对于Retina屏幕输入的width和height都会比原值大，所以保留这个函数
-void window_size_callback(GLFWwindow* window, int width, int height);
-
 // 窗口的宽和高
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 2000;
+const unsigned int SCR_HEIGHT = 1000;
 
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -42,24 +37,28 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
+// GUI Menu
+float scale = 0.0f; // 用于存储滑动条的值
+
+// FBO and texture
+unsigned int fbo, fboTexture;
+
 int main()
 {
-    //设置330版本给imgui使用
+
     const char* glsl_version = "#version 330";
 
-    // glfw: initialize and configure
-    // ------------------------------
+// 初始化glfw的窗口
+#pragma region glfw init
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+// 判断是否是苹果电脑，如果是的话，需要加上下面这行代码
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    // glfw window creation
-    // --------------------
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
     {
@@ -67,100 +66,172 @@ int main()
         glfwTerminate();
         return -1;
     }
+
+    // 基于控制权
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
-    glfwSetFramebufferSizeCallback(window, window_size_callback);
 
-    // tell GLFW to capture our mouse
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
 
-    // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
+#pragma endregion
+
+// 初始化Shader 和 model
+#pragma region shader and model
     stbi_set_flip_vertically_on_load(true);
-
-    // configure global opengl state
-    // -----------------------------
     glEnable(GL_DEPTH_TEST);
+    Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
+    Model ourModel("../resources/nanosuit/nanosuit.obj");
+#pragma endregion
 
-    //在上面配置初始化完成后再进行界面的引入
-    //创建imgui的上下文
-    ImGui::CreateContext();
+// 导入纹理
+#pragma region texture
+
+    // 创建 FBO
+    glGenFramebuffers(1, &fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+    // 创建 FBO 纹理
+    glGenTextures(1, &fboTexture);
+    glBindTexture(GL_TEXTURE_2D, fboTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture, 0);
+
+    // 创建 Renderbuffer 对象用于深度和模板测试
+    unsigned int rbo;
+    glGenRenderbuffers(1, &rbo);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std::cout << "Framebuffer is not complete!" << std::endl;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+#pragma endregion
+
+// 初始化ImGui
+#pragma region ImGui init
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext(nullptr);
+    // 获取 io, 设置ImGui的内容
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
-    // 设置样式
-    ImGui::StyleColorsDark();
-    //设置平台和渲染器
+    io.Fonts->AddFontFromFileTTF("../resources/fonts/kaiu.ttf", 24, nullptr, io.Fonts->GetGlyphRangesChineseFull());
+    //允許停靠
+    io.ConfigFlags  |= ImGuiConfigFlags_DockingEnable;
+    //視口設置無裝飾
+    io.ConfigFlags |= ImGuiViewportFlags_NoDecoration;
+    //允許視口停靠
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    //停靠於背景
+    io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
+
+
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
+    ImGui::StyleColorsDark();
+    ImGuiStyle &style = ImGui::GetStyle();
 
-    // build and compile shaders
-    // -------------------------
-    Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
+    ImVec4* colors = style.Colors;
+    colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.16f, 0.17f, 1.00f);
+    colors[ImGuiCol_FrameBgHovered] = ImVec4(0.37f, 0.36f, 0.36f, 102.00f);
+    colors[ImGuiCol_FrameBgActive] = ImVec4(0.10f, 0.10f, 0.10f, 171.00f);
+    colors[ImGuiCol_TitleBgActive] = ImVec4(0.20f, 0.20f, 0.20f, 255.00f);
+    colors[ImGuiCol_CheckMark] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+    colors[ImGuiCol_SliderGrab] = ImVec4(0.64f, 0.64f, 0.64f, 1.00f);
+    colors[ImGuiCol_SliderGrabActive] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
+    colors[ImGuiCol_Button] = ImVec4(0.22f, 0.22f, 0.22f, 0.40f);
+    colors[ImGuiCol_ButtonHovered] = ImVec4(0.29f, 0.29f, 0.29f, 1.00f);
+    colors[ImGuiCol_ButtonActive] = ImVec4(0.13f, 0.13f, 0.13f, 1.00f);
+    colors[ImGuiCol_Header] = ImVec4(0.45f, 0.45f, 0.45f, 0.31f);
+    colors[ImGuiCol_HeaderHovered] = ImVec4(0.55f, 0.55f, 0.55f, 0.80f);
+    colors[ImGuiCol_HeaderActive] = ImVec4(0.09f, 0.09f, 0.09f, 1.00f);
+    colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.20f);
+    colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.46f, 0.46f, 0.46f, 0.67f);
+    colors[ImGuiCol_ResizeGripActive] = ImVec4(0.17f, 0.17f, 0.17f, 0.95f);
+    colors[ImGuiCol_SeparatorActive] = ImVec4(0.42f, 0.42f, 0.42f, 1.00f);
+    colors[ImGuiCol_SeparatorHovered] = ImVec4(0.50f, 0.50f, 0.50f, 0.78f);
+    colors[ImGuiCol_TabHovered] = ImVec4(0.45f, 0.45f, 0.45f, 0.80f);
+    colors[ImGuiCol_TabActive] = ImVec4(0.28f, 0.28f, 0.28f, 1.00f);
+    colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
+    colors[ImGuiCol_DockingPreview] = ImVec4(0.51f, 0.51f, 0.51f, 0.70f);
+    colors[ImGuiCol_Tab] = ImVec4(0.21f, 0.21f, 0.21f, 0.86f);
+    colors[ImGuiCol_TabUnfocused] = ImVec4(0.15f, 0.15f, 0.15f, 0.97f);
+    colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.40f, 0.13f, 1.00f);
+    colors[ImGuiCol_TextSelectedBg] = ImVec4(0.45f, 1.00f, 0.85f, 0.35f);
 
-    // load models
-    // -----------
-    Model ourModel("../resources/nanosuit/nanosuit.obj");
+    style.WindowRounding = 4;
+    style.FrameRounding = 4;
+    style.ChildRounding = 3;
+    style.ScrollbarRounding = 7;
+    style.GrabRounding = 12;
+    style.TabRounding = 8;
+    style.PopupRounding = 6;
+//    float f = 0.0f;
+#pragma endregion
+    ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
-    float f = 0.0f;
-    // 背景色
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+// 循环渲染程序
+#pragma region loop
     while (!glfwWindowShouldClose(window))
     {
-        // per-frame time logic
-        // --------------------
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        // input
-        // -----
         processInput(window);
-
-        //使用imgui创建窗口
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        ImGui::Begin("Hello, world!");
-        ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-        ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-        ImGui::End();
-
-        // render
-        // ------
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // don't forget to enable shader before setting uniforms
         ourShader.use();
-
-        // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
-
-
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
 
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glEnable(GL_DEPTH_TEST);
 
-        //渲染
+
+        /********************* 绘制imgUI的内容 **********************/
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::DockSpaceOverViewport();
+
+        ImGui::ShowDemoWindow();
+        DrawGUI();
+
+        // 渲染3D界面的视图
+        ImGui::Begin("Scene");
+        ImGui::Image((void*)(intptr_t)fboTexture, ImVec2(SCR_WIDTH, SCR_HEIGHT), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
+
+        // debug的界面 显示用户当前位置
+        DrawDebugUI(camera.Position);
+        // 菜单界面
+        DrawMenuUI(camera, scale, clear_color);
+
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow* backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -170,69 +241,39 @@ int main()
     return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow *window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
 
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera.ProcessKeyboard(LEFT, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, deltaTime);
-}
+void processInput(GLFWwindow *window){
+    // 获取当前活动的ImGui窗口名称
+    ImGuiWindow* currentWindow = ImGui::GetCurrentContext()->NavWindow;
+    if (currentWindow && strcmp(currentWindow->Name, "Scene") == 0) {
+        if(ImGui::IsKeyPressed(ImGuiKey_Escape)){
+            glfwSetWindowShouldClose(window, true);
+        }
+        if (ImGui::IsKeyPressed(ImGuiKey_W))
+            camera.ProcessKeyboard(FORWARD, deltaTime);
+        if (ImGui::IsKeyPressed(ImGuiKey_S))
+            camera.ProcessKeyboard(BACKWARD, deltaTime);
+        if (ImGui::IsKeyPressed(ImGuiKey_A))
+            camera.ProcessKeyboard(LEFT, deltaTime);
+        if (ImGui::IsKeyPressed(ImGuiKey_D))
+            camera.ProcessKeyboard(RIGHT, deltaTime);
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    // make sure the viewport matches the new window dimensions; note that width and
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, width, height);
-}
-
-// glfw: whenever the mouse moves, this callback is called
-// -------------------------------------------------------
-void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
-{
-    float xpos = static_cast<float>(xposIn);
-    float ypos = static_cast<float>(yposIn);
-
-    int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
-    if (state == GLFW_PRESS)
-    {
-        if (firstMouse)
+        if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
         {
-            lastX = xpos;
-            lastY = ypos;
-            firstMouse = false;
+            ImVec2 mouseDelta = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
+            camera.ProcessMouseMovement(mouseDelta.x, -mouseDelta.y);
+            ImGui::ResetMouseDragDelta(ImGuiMouseButton_Left);
         }
 
-        float xoffset = xpos - lastX;
-        float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-        lastX = xpos;
-        lastY = ypos;
-
-        camera.ProcessMouseMovement(xoffset, yoffset);
+        float mouseWheel = ImGui::GetIO().MouseWheel;
+        if (mouseWheel != 0)
+            camera.ProcessMouseScroll(mouseWheel);
     }
-
-    if(state != GLFW_PRESS) firstMouse = true;
-
 }
 
-// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-// ----------------------------------------------------------------------
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-    camera.ProcessMouseScroll(static_cast<float>(yoffset));
-}
-void window_size_callback(GLFWwindow* window, int width, int height)
+
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
