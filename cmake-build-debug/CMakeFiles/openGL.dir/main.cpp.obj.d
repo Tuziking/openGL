@@ -1,5 +1,5 @@
-CMakeFiles/openGL.dir/main.cpp.obj: F:\openGL\main.cpp \
- F:/openGL/include/glad/glad.h F:/openGL/include/KHR/khrplatform.h \
+CMakeFiles/openGL.dir/main.cpp.obj: E:\openGL\main.cpp \
+ E:/openGL/include/glad/glad.h E:/openGL/include/KHR/khrplatform.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
@@ -11,8 +11,8 @@ CMakeFiles/openGL.dir/main.cpp.obj: F:\openGL\main.cpp \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stddef.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stddef.h \
- F:/openGL/include/GLFW/glfw3.h F:/openGL/include/glm/glm.hpp \
- F:/openGL/include/glm/detail/_fixes.hpp \
+ E:/openGL/include/GLFW/glfw3.h E:/openGL/include/glm/glm.hpp \
+ E:/openGL/include/glm/detail/_fixes.hpp \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cmath \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -71,10 +71,10 @@ CMakeFiles/openGL.dir/main.cpp.obj: F:\openGL\main.cpp \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cassert \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/assert.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdlib \
- F:/openGL/include/glm/fwd.hpp F:/openGL/include/glm/detail/type_int.hpp \
- F:/openGL/include/glm/detail/setup.hpp \
+ E:/openGL/include/glm/fwd.hpp E:/openGL/include/glm/detail/type_int.hpp \
+ E:/openGL/include/glm/detail/setup.hpp \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstddef \
- F:/openGL/include/glm/simd/platform.h \
+ E:/openGL/include/glm/simd/platform.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/intrin.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/setjmp.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/psdk_inc/intrin-impl.h \
@@ -178,102 +178,102 @@ CMakeFiles/openGL.dir/main.cpp.obj: F:\openGL\main.cpp \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/xopintrin.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/cpuid.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstdint \
- F:/openGL/include/glm/detail/type_float.hpp \
- F:/openGL/include/glm/detail/type_vec.hpp \
- F:/openGL/include/glm/detail/precision.hpp \
- F:/openGL/include/glm/detail/type_mat.hpp F:/openGL/include/glm/vec2.hpp \
- F:/openGL/include/glm/detail/type_vec2.hpp \
- F:/openGL/include/glm/detail/type_vec2.inl \
- F:/openGL/include/glm/vec3.hpp \
- F:/openGL/include/glm/detail/type_vec3.hpp \
- F:/openGL/include/glm/detail/type_vec3.inl \
- F:/openGL/include/glm/vec4.hpp \
- F:/openGL/include/glm/detail/type_vec4.hpp \
- F:/openGL/include/glm/detail/type_vec4.inl \
- F:/openGL/include/glm/detail/type_vec4_simd.inl \
- F:/openGL/include/glm/mat2x2.hpp \
- F:/openGL/include/glm/detail/type_mat2x2.hpp \
- F:/openGL/include/glm/detail/type_mat2x2.inl \
- F:/openGL/include/glm/detail/func_matrix.hpp \
- F:/openGL/include/glm/mat2x3.hpp \
- F:/openGL/include/glm/detail/type_mat2x3.hpp \
- F:/openGL/include/glm/detail/type_mat2x3.inl \
- F:/openGL/include/glm/mat2x4.hpp \
- F:/openGL/include/glm/detail/type_mat2x4.hpp \
- F:/openGL/include/glm/detail/type_mat2x4.inl \
- F:/openGL/include/glm/mat3x2.hpp \
- F:/openGL/include/glm/detail/type_mat3x2.hpp \
- F:/openGL/include/glm/detail/type_mat3x2.inl \
- F:/openGL/include/glm/mat3x3.hpp \
- F:/openGL/include/glm/detail/type_mat3x3.hpp \
- F:/openGL/include/glm/detail/type_mat3x3.inl \
- F:/openGL/include/glm/mat3x4.hpp \
- F:/openGL/include/glm/detail/type_mat3x4.hpp \
- F:/openGL/include/glm/detail/type_mat3x4.inl \
- F:/openGL/include/glm/mat4x2.hpp \
- F:/openGL/include/glm/detail/type_mat4x2.hpp \
- F:/openGL/include/glm/detail/type_mat4x2.inl \
- F:/openGL/include/glm/mat4x3.hpp \
- F:/openGL/include/glm/detail/type_mat4x3.hpp \
- F:/openGL/include/glm/detail/type_mat4x3.inl \
- F:/openGL/include/glm/mat4x4.hpp \
- F:/openGL/include/glm/detail/type_mat4x4.hpp \
- F:/openGL/include/glm/detail/type_mat4x4.inl \
- F:/openGL/include/glm/detail/type_mat4x4_simd.inl \
- F:/openGL/include/glm/detail/func_matrix.inl \
- F:/openGL/include/glm/geometric.hpp \
- F:/openGL/include/glm/detail/func_geometric.hpp \
- F:/openGL/include/glm/detail/func_geometric.inl \
- F:/openGL/include/glm/detail/func_exponential.hpp \
- F:/openGL/include/glm/detail/type_vec1.hpp \
- F:/openGL/include/glm/detail/type_vec1.inl \
- F:/openGL/include/glm/detail/func_exponential.inl \
- F:/openGL/include/glm/detail/func_vector_relational.hpp \
- F:/openGL/include/glm/detail/func_vector_relational.inl \
- F:/openGL/include/glm/detail/func_vector_relational_simd.inl \
- F:/openGL/include/glm/detail/_vectorize.hpp \
- F:/openGL/include/glm/detail/func_exponential_simd.inl \
- F:/openGL/include/glm/simd/exponential.h \
- F:/openGL/include/glm/detail/func_common.hpp \
- F:/openGL/include/glm/detail/_fixes.hpp \
- F:/openGL/include/glm/detail/func_common.inl \
- F:/openGL/include/glm/detail/func_common_simd.inl \
- F:/openGL/include/glm/simd/common.h \
- F:/openGL/include/glm/detail/func_geometric_simd.inl \
- F:/openGL/include/glm/simd/geometric.h \
- F:/openGL/include/glm/detail/func_matrix_simd.inl \
- F:/openGL/include/glm/simd/matrix.h \
- F:/openGL/include/glm/trigonometric.hpp \
- F:/openGL/include/glm/detail/func_trigonometric.hpp \
- F:/openGL/include/glm/detail/func_trigonometric.inl \
- F:/openGL/include/glm/detail/func_trigonometric_simd.inl \
- F:/openGL/include/glm/exponential.hpp F:/openGL/include/glm/common.hpp \
- F:/openGL/include/glm/packing.hpp \
- F:/openGL/include/glm/detail/func_packing.hpp \
- F:/openGL/include/glm/detail/func_packing.inl \
- F:/openGL/include/glm/detail/type_half.hpp \
- F:/openGL/include/glm/detail/type_half.inl \
- F:/openGL/include/glm/detail/func_packing_simd.inl \
- F:/openGL/include/glm/matrix.hpp \
- F:/openGL/include/glm/vector_relational.hpp \
- F:/openGL/include/glm/integer.hpp \
- F:/openGL/include/glm/detail/func_integer.hpp \
- F:/openGL/include/glm/detail/func_integer.inl \
- F:/openGL/include/glm/detail/func_integer_simd.inl \
- F:/openGL/include/glm/simd/integer.h \
- F:/openGL/include/glm/gtc/matrix_transform.hpp \
- F:/openGL/include/glm/gtc/constants.hpp \
- F:/openGL/include/glm/gtc/constants.inl \
- F:/openGL/include/glm/gtc/matrix_transform.inl \
- F:/openGL/include/glm/gtc/type_ptr.hpp \
- F:/openGL/include/glm/gtc/quaternion.hpp \
- F:/openGL/include/glm/gtc/quaternion.inl \
- F:/openGL/include/glm/gtc/quaternion_simd.inl \
+ E:/openGL/include/glm/detail/type_float.hpp \
+ E:/openGL/include/glm/detail/type_vec.hpp \
+ E:/openGL/include/glm/detail/precision.hpp \
+ E:/openGL/include/glm/detail/type_mat.hpp E:/openGL/include/glm/vec2.hpp \
+ E:/openGL/include/glm/detail/type_vec2.hpp \
+ E:/openGL/include/glm/detail/type_vec2.inl \
+ E:/openGL/include/glm/vec3.hpp \
+ E:/openGL/include/glm/detail/type_vec3.hpp \
+ E:/openGL/include/glm/detail/type_vec3.inl \
+ E:/openGL/include/glm/vec4.hpp \
+ E:/openGL/include/glm/detail/type_vec4.hpp \
+ E:/openGL/include/glm/detail/type_vec4.inl \
+ E:/openGL/include/glm/detail/type_vec4_simd.inl \
+ E:/openGL/include/glm/mat2x2.hpp \
+ E:/openGL/include/glm/detail/type_mat2x2.hpp \
+ E:/openGL/include/glm/detail/type_mat2x2.inl \
+ E:/openGL/include/glm/detail/func_matrix.hpp \
+ E:/openGL/include/glm/mat2x3.hpp \
+ E:/openGL/include/glm/detail/type_mat2x3.hpp \
+ E:/openGL/include/glm/detail/type_mat2x3.inl \
+ E:/openGL/include/glm/mat2x4.hpp \
+ E:/openGL/include/glm/detail/type_mat2x4.hpp \
+ E:/openGL/include/glm/detail/type_mat2x4.inl \
+ E:/openGL/include/glm/mat3x2.hpp \
+ E:/openGL/include/glm/detail/type_mat3x2.hpp \
+ E:/openGL/include/glm/detail/type_mat3x2.inl \
+ E:/openGL/include/glm/mat3x3.hpp \
+ E:/openGL/include/glm/detail/type_mat3x3.hpp \
+ E:/openGL/include/glm/detail/type_mat3x3.inl \
+ E:/openGL/include/glm/mat3x4.hpp \
+ E:/openGL/include/glm/detail/type_mat3x4.hpp \
+ E:/openGL/include/glm/detail/type_mat3x4.inl \
+ E:/openGL/include/glm/mat4x2.hpp \
+ E:/openGL/include/glm/detail/type_mat4x2.hpp \
+ E:/openGL/include/glm/detail/type_mat4x2.inl \
+ E:/openGL/include/glm/mat4x3.hpp \
+ E:/openGL/include/glm/detail/type_mat4x3.hpp \
+ E:/openGL/include/glm/detail/type_mat4x3.inl \
+ E:/openGL/include/glm/mat4x4.hpp \
+ E:/openGL/include/glm/detail/type_mat4x4.hpp \
+ E:/openGL/include/glm/detail/type_mat4x4.inl \
+ E:/openGL/include/glm/detail/type_mat4x4_simd.inl \
+ E:/openGL/include/glm/detail/func_matrix.inl \
+ E:/openGL/include/glm/geometric.hpp \
+ E:/openGL/include/glm/detail/func_geometric.hpp \
+ E:/openGL/include/glm/detail/func_geometric.inl \
+ E:/openGL/include/glm/detail/func_exponential.hpp \
+ E:/openGL/include/glm/detail/type_vec1.hpp \
+ E:/openGL/include/glm/detail/type_vec1.inl \
+ E:/openGL/include/glm/detail/func_exponential.inl \
+ E:/openGL/include/glm/detail/func_vector_relational.hpp \
+ E:/openGL/include/glm/detail/func_vector_relational.inl \
+ E:/openGL/include/glm/detail/func_vector_relational_simd.inl \
+ E:/openGL/include/glm/detail/_vectorize.hpp \
+ E:/openGL/include/glm/detail/func_exponential_simd.inl \
+ E:/openGL/include/glm/simd/exponential.h \
+ E:/openGL/include/glm/detail/func_common.hpp \
+ E:/openGL/include/glm/detail/_fixes.hpp \
+ E:/openGL/include/glm/detail/func_common.inl \
+ E:/openGL/include/glm/detail/func_common_simd.inl \
+ E:/openGL/include/glm/simd/common.h \
+ E:/openGL/include/glm/detail/func_geometric_simd.inl \
+ E:/openGL/include/glm/simd/geometric.h \
+ E:/openGL/include/glm/detail/func_matrix_simd.inl \
+ E:/openGL/include/glm/simd/matrix.h \
+ E:/openGL/include/glm/trigonometric.hpp \
+ E:/openGL/include/glm/detail/func_trigonometric.hpp \
+ E:/openGL/include/glm/detail/func_trigonometric.inl \
+ E:/openGL/include/glm/detail/func_trigonometric_simd.inl \
+ E:/openGL/include/glm/exponential.hpp E:/openGL/include/glm/common.hpp \
+ E:/openGL/include/glm/packing.hpp \
+ E:/openGL/include/glm/detail/func_packing.hpp \
+ E:/openGL/include/glm/detail/func_packing.inl \
+ E:/openGL/include/glm/detail/type_half.hpp \
+ E:/openGL/include/glm/detail/type_half.inl \
+ E:/openGL/include/glm/detail/func_packing_simd.inl \
+ E:/openGL/include/glm/matrix.hpp \
+ E:/openGL/include/glm/vector_relational.hpp \
+ E:/openGL/include/glm/integer.hpp \
+ E:/openGL/include/glm/detail/func_integer.hpp \
+ E:/openGL/include/glm/detail/func_integer.inl \
+ E:/openGL/include/glm/detail/func_integer_simd.inl \
+ E:/openGL/include/glm/simd/integer.h \
+ E:/openGL/include/glm/gtc/matrix_transform.hpp \
+ E:/openGL/include/glm/gtc/constants.hpp \
+ E:/openGL/include/glm/gtc/constants.inl \
+ E:/openGL/include/glm/gtc/matrix_transform.inl \
+ E:/openGL/include/glm/gtc/type_ptr.hpp \
+ E:/openGL/include/glm/gtc/quaternion.hpp \
+ E:/openGL/include/glm/gtc/quaternion.inl \
+ E:/openGL/include/glm/gtc/quaternion_simd.inl \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/cstring \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/string.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- F:/openGL/include/glm/gtc/type_ptr.inl \
- F:/openGL/include/learnopengl/shader_m.h \
+ E:/openGL/include/glm/gtc/type_ptr.inl \
+ E:/openGL/include/learnopengl/shader_m.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/string \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stringfwd.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/memoryfwd.h \
@@ -377,17 +377,17 @@ CMakeFiles/openGL.dir/main.cpp.obj: F:\openGL\main.cpp \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
- F:/openGL/include/learnopengl/camera.h \
- F:/openGL/include/learnopengl/model.h \
- F:/openGL/include/assimp/Importer.hpp F:/openGL/include/assimp/types.h \
- F:/openGL/include/assimp/defs.h F:/openGL/include/assimp/config.h \
- F:/openGL/include/assimp/vector2.h F:/openGL/include/assimp/vector3.h \
- F:/openGL/include/assimp/color4.h F:/openGL/include/assimp/matrix3x3.h \
- F:/openGL/include/assimp/matrix4x4.h \
- F:/openGL/include/assimp/quaternion.h \
- F:/openGL/include/assimp/vector2.inl \
- F:/openGL/include/assimp/vector3.inl F:/openGL/include/assimp/color4.inl \
- F:/openGL/include/assimp/matrix3x3.inl \
+ E:/openGL/include/learnopengl/camera.h \
+ E:/openGL/include/learnopengl/model.h \
+ E:/openGL/include/assimp/Importer.hpp E:/openGL/include/assimp/types.h \
+ E:/openGL/include/assimp/defs.h E:/openGL/include/assimp/config.h \
+ E:/openGL/include/assimp/vector2.h E:/openGL/include/assimp/vector3.h \
+ E:/openGL/include/assimp/color4.h E:/openGL/include/assimp/matrix3x3.h \
+ E:/openGL/include/assimp/matrix4x4.h \
+ E:/openGL/include/assimp/quaternion.h \
+ E:/openGL/include/assimp/vector2.inl \
+ E:/openGL/include/assimp/vector3.inl E:/openGL/include/assimp/color4.inl \
+ E:/openGL/include/assimp/matrix3x3.inl \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_algo.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/algorithmfwd.h \
@@ -396,20 +396,20 @@ CMakeFiles/openGL.dir/main.cpp.obj: F:\openGL\main.cpp \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_tempbuf.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_algorithm_defs.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/execution_defs.h \
- F:/openGL/include/assimp/matrix4x4.inl \
- F:/openGL/include/assimp/MathFunctions.h \
- F:/openGL/include/assimp/quaternion.inl F:/openGL/include/assimp/scene.h \
- F:/openGL/include/assimp/texture.h \
- F:/openGL/include/assimp/Compiler/pushpack1.h \
- F:/openGL/include/assimp/Compiler/poppack1.h \
- F:/openGL/include/assimp/mesh.h F:/openGL/include/assimp/aabb.h \
- F:/openGL/include/assimp/light.h F:/openGL/include/assimp/camera.h \
- F:/openGL/include/assimp/material.h \
- F:/openGL/include/assimp/material.inl F:/openGL/include/assimp/anim.h \
- F:/openGL/include/assimp/metadata.h \
- F:/openGL/include/assimp/postprocess.h \
- F:/openGL/include/learnopengl/mesh.h \
- F:/openGL/include/learnopengl/shader.h \
+ E:/openGL/include/assimp/matrix4x4.inl \
+ E:/openGL/include/assimp/MathFunctions.h \
+ E:/openGL/include/assimp/quaternion.inl E:/openGL/include/assimp/scene.h \
+ E:/openGL/include/assimp/texture.h \
+ E:/openGL/include/assimp/Compiler/pushpack1.h \
+ E:/openGL/include/assimp/Compiler/poppack1.h \
+ E:/openGL/include/assimp/mesh.h E:/openGL/include/assimp/aabb.h \
+ E:/openGL/include/assimp/light.h E:/openGL/include/assimp/camera.h \
+ E:/openGL/include/assimp/material.h \
+ E:/openGL/include/assimp/material.inl E:/openGL/include/assimp/anim.h \
+ E:/openGL/include/assimp/metadata.h \
+ E:/openGL/include/assimp/postprocess.h \
+ E:/openGL/include/learnopengl/mesh.h \
+ E:/openGL/include/learnopengl/shader.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_uninitialized.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_vector.h \
@@ -422,11 +422,63 @@ CMakeFiles/openGL.dir/main.cpp.obj: F:\openGL\main.cpp \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_map.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multimap.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/erase_if.h \
- F:/openGL/include/stb_image.h F:/openGL/include/imgui/imgui.h \
- F:/openGL/include/imgui/imconfig.h \
+ E:/openGL/include/stb_image.h E:/openGL/include/imgUI/imgui.h \
+ E:/openGL/include/imgUI/imconfig.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
- F:/openGL/include/imgui/imgui_impl_glfw.h \
- F:/openGL/include/imgui/imgui_impl_opengl3.h \
- F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/math.h
+ E:/openGL/include/imgUI/imgui_impl_glfw.h \
+ E:/openGL/include/imgUI/imgui_impl_opengl3.h E:/openGL/include/UI/GUI.h \
+ E:/openGL/include/UI/TextEditor.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/array \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/compare \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/align.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unique_ptr.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr_base.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocated_ptr.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ext/concurrence.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/shared_ptr_atomic.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_base.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/atomic_lockfree_defines.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward/auto_ptr.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_memory_defs.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/hashtable.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/hashtable_policy.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/enable_special_members.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_map \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_map.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/regex \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bitset \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/locale \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_facets_nonio.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ctime \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/time_members.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/messages_members.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_facets_nonio.tcc \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_conv.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/stack \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/deque \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_deque.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/deque.tcc \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_stack.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_function.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_constants.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_error.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_automaton.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_automaton.tcc \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_scanner.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_scanner.tcc \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_compiler.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_compiler.tcc \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex.tcc \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_executor.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/regex_executor.tcc \
+ E:/openGL/include/imgUI/imgui_internal.h \
+ F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/math.h \
+ E:/openGL/include/imgUI/imstb_textedit.h E:/openGL/include/Particle.h

@@ -1,6 +1,6 @@
-CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj: \
- F:\openGL\include\imgUI\imgui_impl_opengl3.cpp \
- F:\openGL\include\imgUI\imgui.h F:\openGL\include\imgUI\imconfig.h \
+CMakeFiles/openGL.dir/include/Imgui/imgui_impl_opengl3.cpp.obj: \
+ E:\openGL\include\Imgui\imgui_impl_opengl3.cpp \
+ E:\openGL\include\Imgui\imgui.h E:\openGL\include\Imgui\imconfig.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
@@ -34,7 +34,7 @@ CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj: \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
- F:\openGL\include\imgUI\imgui_impl_opengl3.h \
+ E:\openGL\include\Imgui\imgui_impl_opengl3.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
@@ -42,7 +42,7 @@ CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj: \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
- F:\openGL\include\imgUI\imgui_impl_opengl3_loader.h \
+ E:\openGL\include\Imgui\imgui_impl_opengl3_loader.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/windows.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/sdkddkver.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/excpt.h \

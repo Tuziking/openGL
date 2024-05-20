@@ -1,4 +1,4 @@
-CMakeFiles/openGL.dir/src/glad.c.obj: F:\openGL\src\glad.c \
+CMakeFiles/openGL.dir/src/glad.c.obj: E:\openGL\src\glad.c \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
@@ -22,7 +22,7 @@ CMakeFiles/openGL.dir/src/glad.c.obj: F:\openGL\src\glad.c \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/string.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- F:/openGL/include/glad/glad.h F:/openGL/include/KHR/khrplatform.h \
+ E:/openGL/include/glad/glad.h E:/openGL/include/KHR/khrplatform.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stddef.h \

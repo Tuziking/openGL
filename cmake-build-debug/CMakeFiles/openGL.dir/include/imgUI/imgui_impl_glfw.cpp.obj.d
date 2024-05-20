@@ -1,6 +1,6 @@
-CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj: \
- F:\openGL\include\imgUI\imgui_impl_glfw.cpp \
- F:\openGL\include\imgUI\imgui.h F:\openGL\include\imgUI\imconfig.h \
+CMakeFiles/openGL.dir/include/Imgui/imgui_impl_glfw.cpp.obj: \
+ E:\openGL\include\Imgui\imgui_impl_glfw.cpp \
+ E:\openGL\include\Imgui\imgui.h E:\openGL\include\Imgui\imconfig.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
@@ -34,11 +34,11 @@ CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj: \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
- F:\openGL\include\imgUI\imgui_impl_glfw.h F:/openGL/include/GLFW/glfw3.h \
+ E:\openGL\include\Imgui\imgui_impl_glfw.h E:/openGL/include/GLFW/glfw3.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/GL/gl.h \
- F:/openGL/include/GLFW/glfw3native.h \
+ E:/openGL/include/GLFW/glfw3native.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/windows.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/sdkddkver.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/excpt.h \
