@@ -138,7 +138,7 @@ int main()
     // 纹理文件的图像数据
     unsigned char *imageDate;
     // 使用stb_image.h库中读取纹理文件的相关属性和图像数据
-    imageDate = stbi_load("../resources/texture/snowflower.jpg", &width, &height, &channelNum, 0);
+    imageDate = stbi_load("../resources/texture/snowflower.png", &width, &height, &channelNum, STBI_rgb_alpha);
     // 生成纹理
     glGenTextures(1, &texture);
     // 绑定纹理
@@ -149,12 +149,12 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // 将从文件中读取的纹理数据传入
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageDate);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageDate);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     stbi_image_free(imageDate);
-    // 启用OpenGL的深度检测，使绘制的图形更具真实感
-    glEnable(GL_DEPTH_TEST);
+//    // 启用OpenGL的深度检测，使绘制的图形更具真实感
+//    glEnable(GL_DEPTH_TEST);
 
     // 初始化粒子系统
     for (unsigned int i = 0; i < PARTICLE_NUM; i++)
@@ -249,8 +249,9 @@ int main()
 //    float f = 0.0f;
 #pragma endregion
 
-
-
+// 初始化天空盒
+#pragma region skybox init
+Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
 
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 // 循环渲染程序
@@ -282,21 +283,20 @@ int main()
         ourModel.Draw(ourShader);
 
         // 渲染雪花粒子
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
         glUniform1i(glGetUniformLocation(program, "ourTexture"), 0);
-//        glUseProgram(program);
         snowShader.use();
         snowShader.setMat4("view", view);
         snowShader.setMat4("proj", projection);
-//        glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-//        glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
         particlesTmp.clear();
         for (unsigned int i = 0; i < particles.size(); i++) {
             glm::mat4 model1 = glm::mat4(1.0f);
             particles[i].update(glfwGetTime());
             model1 = glm::translate(model1, particles[i].getX());
-//            glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, glm::value_ptr(model1));
+
             snowShader.setMat4("model", model1);
             if (particles[i].exist())
                 particlesTmp.push_back(particles[i]);
@@ -307,6 +307,7 @@ int main()
             glBindVertexArray(0);
         }
         particles = particlesTmp;
+        glDisable(GL_BLEND);
 
         // 2. 解除帧缓冲区绑定，返回默认帧缓冲区
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
