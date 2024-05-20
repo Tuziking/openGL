@@ -1,6 +1,6 @@
-CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj: \
- F:\openGL\include\imgUI\imgui_demo.cpp F:\openGL\include\imgUI\imgui.h \
- F:\openGL\include\imgUI\imconfig.h \
+CMakeFiles/openGL.dir/include/Imgui/imgui_demo.cpp.obj: \
+ E:\openGL\include\Imgui\imgui_demo.cpp E:\openGL\include\Imgui\imgui.h \
+ E:\openGL\include\Imgui\imconfig.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \

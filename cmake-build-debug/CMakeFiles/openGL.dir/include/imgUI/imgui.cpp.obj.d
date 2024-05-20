@@ -1,6 +1,6 @@
-CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj: \
- F:\openGL\include\imgUI\imgui.cpp F:\openGL\include\imgUI\imgui.h \
- F:\openGL\include\imgUI\imconfig.h \
+CMakeFiles/openGL.dir/include/Imgui/imgui.cpp.obj: \
+ E:\openGL\include\Imgui\imgui.cpp E:\openGL\include\Imgui\imgui.h \
+ E:\openGL\include\Imgui\imconfig.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/float.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
@@ -34,7 +34,7 @@ CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj: \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/mm_malloc.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/errno.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/std_abs.h \
- F:\openGL\include\imgUI\imgui_internal.h \
+ E:\openGL\include\Imgui\imgui_internal.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
@@ -170,7 +170,7 @@ CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj: \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/prfchwintrin.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/keylockerintrin.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/amxfp16intrin.h \
- F:\openGL\include\imgUI\imstb_textedit.h \
+ E:\openGL\include\Imgui\imstb_textedit.h \
  F:/CLion\ 2024.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/stdint.h \
  F:/CLion\ 2024.1.1/bin/mingw/x86_64-w64-mingw32/include/windows.h \

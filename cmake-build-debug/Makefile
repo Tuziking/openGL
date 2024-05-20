@@ -56,10 +56,10 @@ RM = "F:\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = F:\openGL
+CMAKE_SOURCE_DIR = E:\openGL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = F:\openGL\cmake-build-debug
+CMAKE_BINARY_DIR = E:\openGL\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start F:\openGL\cmake-build-debug\CMakeFiles F:\openGL\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start E:\openGL\cmake-build-debug\CMakeFiles E:\openGL\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start F:\openGL\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start E:\openGL\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,173 +128,186 @@ openGL/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/build
 .PHONY : openGL/fast
 
-include/imgUI/imgui.obj: include/imgUI/imgui.cpp.obj
-.PHONY : include/imgUI/imgui.obj
+#=============================================================================
+# Target rules for targets named test_program
+
+# Build rule for target.
+test_program: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 test_program
+.PHONY : test_program
+
+# fast build rule for target.
+test_program/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/build
+.PHONY : test_program/fast
+
+include/Imgui/imgui.obj: include/Imgui/imgui.cpp.obj
+.PHONY : include/Imgui/imgui.obj
 
 # target to build an object file
-include/imgUI/imgui.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj
-.PHONY : include/imgUI/imgui.cpp.obj
+include/Imgui/imgui.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui.cpp.obj
+.PHONY : include/Imgui/imgui.cpp.obj
 
-include/imgUI/imgui.i: include/imgUI/imgui.cpp.i
-.PHONY : include/imgUI/imgui.i
+include/Imgui/imgui.i: include/Imgui/imgui.cpp.i
+.PHONY : include/Imgui/imgui.i
 
 # target to preprocess a source file
-include/imgUI/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.i
-.PHONY : include/imgUI/imgui.cpp.i
+include/Imgui/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui.cpp.i
+.PHONY : include/Imgui/imgui.cpp.i
 
-include/imgUI/imgui.s: include/imgUI/imgui.cpp.s
-.PHONY : include/imgUI/imgui.s
+include/Imgui/imgui.s: include/Imgui/imgui.cpp.s
+.PHONY : include/Imgui/imgui.s
 
 # target to generate assembly for a file
-include/imgUI/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.s
-.PHONY : include/imgUI/imgui.cpp.s
+include/Imgui/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui.cpp.s
+.PHONY : include/Imgui/imgui.cpp.s
 
-include/imgUI/imgui_demo.obj: include/imgUI/imgui_demo.cpp.obj
-.PHONY : include/imgUI/imgui_demo.obj
+include/Imgui/imgui_demo.obj: include/Imgui/imgui_demo.cpp.obj
+.PHONY : include/Imgui/imgui_demo.obj
 
 # target to build an object file
-include/imgUI/imgui_demo.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj
-.PHONY : include/imgUI/imgui_demo.cpp.obj
+include/Imgui/imgui_demo.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_demo.cpp.obj
+.PHONY : include/Imgui/imgui_demo.cpp.obj
 
-include/imgUI/imgui_demo.i: include/imgUI/imgui_demo.cpp.i
-.PHONY : include/imgUI/imgui_demo.i
+include/Imgui/imgui_demo.i: include/Imgui/imgui_demo.cpp.i
+.PHONY : include/Imgui/imgui_demo.i
 
 # target to preprocess a source file
-include/imgUI/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.i
-.PHONY : include/imgUI/imgui_demo.cpp.i
+include/Imgui/imgui_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_demo.cpp.i
+.PHONY : include/Imgui/imgui_demo.cpp.i
 
-include/imgUI/imgui_demo.s: include/imgUI/imgui_demo.cpp.s
-.PHONY : include/imgUI/imgui_demo.s
+include/Imgui/imgui_demo.s: include/Imgui/imgui_demo.cpp.s
+.PHONY : include/Imgui/imgui_demo.s
 
 # target to generate assembly for a file
-include/imgUI/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.s
-.PHONY : include/imgUI/imgui_demo.cpp.s
+include/Imgui/imgui_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_demo.cpp.s
+.PHONY : include/Imgui/imgui_demo.cpp.s
 
-include/imgUI/imgui_draw.obj: include/imgUI/imgui_draw.cpp.obj
-.PHONY : include/imgUI/imgui_draw.obj
+include/Imgui/imgui_draw.obj: include/Imgui/imgui_draw.cpp.obj
+.PHONY : include/Imgui/imgui_draw.obj
 
 # target to build an object file
-include/imgUI/imgui_draw.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj
-.PHONY : include/imgUI/imgui_draw.cpp.obj
+include/Imgui/imgui_draw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_draw.cpp.obj
+.PHONY : include/Imgui/imgui_draw.cpp.obj
 
-include/imgUI/imgui_draw.i: include/imgUI/imgui_draw.cpp.i
-.PHONY : include/imgUI/imgui_draw.i
+include/Imgui/imgui_draw.i: include/Imgui/imgui_draw.cpp.i
+.PHONY : include/Imgui/imgui_draw.i
 
 # target to preprocess a source file
-include/imgUI/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.i
-.PHONY : include/imgUI/imgui_draw.cpp.i
+include/Imgui/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_draw.cpp.i
+.PHONY : include/Imgui/imgui_draw.cpp.i
 
-include/imgUI/imgui_draw.s: include/imgUI/imgui_draw.cpp.s
-.PHONY : include/imgUI/imgui_draw.s
+include/Imgui/imgui_draw.s: include/Imgui/imgui_draw.cpp.s
+.PHONY : include/Imgui/imgui_draw.s
 
 # target to generate assembly for a file
-include/imgUI/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.s
-.PHONY : include/imgUI/imgui_draw.cpp.s
+include/Imgui/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_draw.cpp.s
+.PHONY : include/Imgui/imgui_draw.cpp.s
 
-include/imgUI/imgui_impl_glfw.obj: include/imgUI/imgui_impl_glfw.cpp.obj
-.PHONY : include/imgUI/imgui_impl_glfw.obj
+include/Imgui/imgui_impl_glfw.obj: include/Imgui/imgui_impl_glfw.cpp.obj
+.PHONY : include/Imgui/imgui_impl_glfw.obj
 
 # target to build an object file
-include/imgUI/imgui_impl_glfw.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj
-.PHONY : include/imgUI/imgui_impl_glfw.cpp.obj
+include/Imgui/imgui_impl_glfw.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_impl_glfw.cpp.obj
+.PHONY : include/Imgui/imgui_impl_glfw.cpp.obj
 
-include/imgUI/imgui_impl_glfw.i: include/imgUI/imgui_impl_glfw.cpp.i
-.PHONY : include/imgUI/imgui_impl_glfw.i
+include/Imgui/imgui_impl_glfw.i: include/Imgui/imgui_impl_glfw.cpp.i
+.PHONY : include/Imgui/imgui_impl_glfw.i
 
 # target to preprocess a source file
-include/imgUI/imgui_impl_glfw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.i
-.PHONY : include/imgUI/imgui_impl_glfw.cpp.i
+include/Imgui/imgui_impl_glfw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_impl_glfw.cpp.i
+.PHONY : include/Imgui/imgui_impl_glfw.cpp.i
 
-include/imgUI/imgui_impl_glfw.s: include/imgUI/imgui_impl_glfw.cpp.s
-.PHONY : include/imgUI/imgui_impl_glfw.s
+include/Imgui/imgui_impl_glfw.s: include/Imgui/imgui_impl_glfw.cpp.s
+.PHONY : include/Imgui/imgui_impl_glfw.s
 
 # target to generate assembly for a file
-include/imgUI/imgui_impl_glfw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.s
-.PHONY : include/imgUI/imgui_impl_glfw.cpp.s
+include/Imgui/imgui_impl_glfw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_impl_glfw.cpp.s
+.PHONY : include/Imgui/imgui_impl_glfw.cpp.s
 
-include/imgUI/imgui_impl_opengl3.obj: include/imgUI/imgui_impl_opengl3.cpp.obj
-.PHONY : include/imgUI/imgui_impl_opengl3.obj
+include/Imgui/imgui_impl_opengl3.obj: include/Imgui/imgui_impl_opengl3.cpp.obj
+.PHONY : include/Imgui/imgui_impl_opengl3.obj
 
 # target to build an object file
-include/imgUI/imgui_impl_opengl3.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj
-.PHONY : include/imgUI/imgui_impl_opengl3.cpp.obj
+include/Imgui/imgui_impl_opengl3.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_impl_opengl3.cpp.obj
+.PHONY : include/Imgui/imgui_impl_opengl3.cpp.obj
 
-include/imgUI/imgui_impl_opengl3.i: include/imgUI/imgui_impl_opengl3.cpp.i
-.PHONY : include/imgUI/imgui_impl_opengl3.i
+include/Imgui/imgui_impl_opengl3.i: include/Imgui/imgui_impl_opengl3.cpp.i
+.PHONY : include/Imgui/imgui_impl_opengl3.i
 
 # target to preprocess a source file
-include/imgUI/imgui_impl_opengl3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.i
-.PHONY : include/imgUI/imgui_impl_opengl3.cpp.i
+include/Imgui/imgui_impl_opengl3.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_impl_opengl3.cpp.i
+.PHONY : include/Imgui/imgui_impl_opengl3.cpp.i
 
-include/imgUI/imgui_impl_opengl3.s: include/imgUI/imgui_impl_opengl3.cpp.s
-.PHONY : include/imgUI/imgui_impl_opengl3.s
+include/Imgui/imgui_impl_opengl3.s: include/Imgui/imgui_impl_opengl3.cpp.s
+.PHONY : include/Imgui/imgui_impl_opengl3.s
 
 # target to generate assembly for a file
-include/imgUI/imgui_impl_opengl3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.s
-.PHONY : include/imgUI/imgui_impl_opengl3.cpp.s
+include/Imgui/imgui_impl_opengl3.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_impl_opengl3.cpp.s
+.PHONY : include/Imgui/imgui_impl_opengl3.cpp.s
 
-include/imgUI/imgui_tables.obj: include/imgUI/imgui_tables.cpp.obj
-.PHONY : include/imgUI/imgui_tables.obj
+include/Imgui/imgui_tables.obj: include/Imgui/imgui_tables.cpp.obj
+.PHONY : include/Imgui/imgui_tables.obj
 
 # target to build an object file
-include/imgUI/imgui_tables.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj
-.PHONY : include/imgUI/imgui_tables.cpp.obj
+include/Imgui/imgui_tables.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_tables.cpp.obj
+.PHONY : include/Imgui/imgui_tables.cpp.obj
 
-include/imgUI/imgui_tables.i: include/imgUI/imgui_tables.cpp.i
-.PHONY : include/imgUI/imgui_tables.i
+include/Imgui/imgui_tables.i: include/Imgui/imgui_tables.cpp.i
+.PHONY : include/Imgui/imgui_tables.i
 
 # target to preprocess a source file
-include/imgUI/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.i
-.PHONY : include/imgUI/imgui_tables.cpp.i
+include/Imgui/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_tables.cpp.i
+.PHONY : include/Imgui/imgui_tables.cpp.i
 
-include/imgUI/imgui_tables.s: include/imgUI/imgui_tables.cpp.s
-.PHONY : include/imgUI/imgui_tables.s
+include/Imgui/imgui_tables.s: include/Imgui/imgui_tables.cpp.s
+.PHONY : include/Imgui/imgui_tables.s
 
 # target to generate assembly for a file
-include/imgUI/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.s
-.PHONY : include/imgUI/imgui_tables.cpp.s
+include/Imgui/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_tables.cpp.s
+.PHONY : include/Imgui/imgui_tables.cpp.s
 
-include/imgUI/imgui_widgets.obj: include/imgUI/imgui_widgets.cpp.obj
-.PHONY : include/imgUI/imgui_widgets.obj
+include/Imgui/imgui_widgets.obj: include/Imgui/imgui_widgets.cpp.obj
+.PHONY : include/Imgui/imgui_widgets.obj
 
 # target to build an object file
-include/imgUI/imgui_widgets.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj
-.PHONY : include/imgUI/imgui_widgets.cpp.obj
+include/Imgui/imgui_widgets.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_widgets.cpp.obj
+.PHONY : include/Imgui/imgui_widgets.cpp.obj
 
-include/imgUI/imgui_widgets.i: include/imgUI/imgui_widgets.cpp.i
-.PHONY : include/imgUI/imgui_widgets.i
+include/Imgui/imgui_widgets.i: include/Imgui/imgui_widgets.cpp.i
+.PHONY : include/Imgui/imgui_widgets.i
 
 # target to preprocess a source file
-include/imgUI/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.i
-.PHONY : include/imgUI/imgui_widgets.cpp.i
+include/Imgui/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_widgets.cpp.i
+.PHONY : include/Imgui/imgui_widgets.cpp.i
 
-include/imgUI/imgui_widgets.s: include/imgUI/imgui_widgets.cpp.s
-.PHONY : include/imgUI/imgui_widgets.s
+include/Imgui/imgui_widgets.s: include/Imgui/imgui_widgets.cpp.s
+.PHONY : include/Imgui/imgui_widgets.s
 
 # target to generate assembly for a file
-include/imgUI/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.s
-.PHONY : include/imgUI/imgui_widgets.cpp.s
+include/Imgui/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/include/Imgui/imgui_widgets.cpp.s
+.PHONY : include/Imgui/imgui_widgets.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
@@ -320,12 +333,40 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Particle.obj: src/Particle.cpp.obj
+.PHONY : src/Particle.obj
+
+# target to build an object file
+src/Particle.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Particle.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/src/Particle.cpp.obj
+.PHONY : src/Particle.cpp.obj
+
+src/Particle.i: src/Particle.cpp.i
+.PHONY : src/Particle.i
+
+# target to preprocess a source file
+src/Particle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Particle.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/src/Particle.cpp.i
+.PHONY : src/Particle.cpp.i
+
+src/Particle.s: src/Particle.cpp.s
+.PHONY : src/Particle.s
+
+# target to generate assembly for a file
+src/Particle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/Particle.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/src/Particle.cpp.s
+.PHONY : src/Particle.cpp.s
+
 src/glad.obj: src/glad.c.obj
 .PHONY : src/glad.obj
 
 # target to build an object file
 src/glad.c.obj:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/glad.c.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/src/glad.c.obj
 .PHONY : src/glad.c.obj
 
 src/glad.i: src/glad.c.i
@@ -334,6 +375,7 @@ src/glad.i: src/glad.c.i
 # target to preprocess a source file
 src/glad.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/glad.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/src/glad.c.i
 .PHONY : src/glad.c.i
 
 src/glad.s: src/glad.c.s
@@ -342,7 +384,32 @@ src/glad.s: src/glad.c.s
 # target to generate assembly for a file
 src/glad.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\openGL.dir\build.make CMakeFiles/openGL.dir/src/glad.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/src/glad.c.s
 .PHONY : src/glad.c.s
+
+test/main.obj: test/main.cpp.obj
+.PHONY : test/main.obj
+
+# target to build an object file
+test/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/test/main.cpp.obj
+.PHONY : test/main.cpp.obj
+
+test/main.i: test/main.cpp.i
+.PHONY : test/main.i
+
+# target to preprocess a source file
+test/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/test/main.cpp.i
+.PHONY : test/main.cpp.i
+
+test/main.s: test/main.cpp.s
+.PHONY : test/main.s
+
+# target to generate assembly for a file
+test/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\test_program.dir\build.make CMakeFiles/test_program.dir/test/main.cpp.s
+.PHONY : test/main.cpp.s
 
 # Help Target
 help:
@@ -353,33 +420,40 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... openGL
-	@echo ... include/imgUI/imgui.obj
-	@echo ... include/imgUI/imgui.i
-	@echo ... include/imgUI/imgui.s
-	@echo ... include/imgUI/imgui_demo.obj
-	@echo ... include/imgUI/imgui_demo.i
-	@echo ... include/imgUI/imgui_demo.s
-	@echo ... include/imgUI/imgui_draw.obj
-	@echo ... include/imgUI/imgui_draw.i
-	@echo ... include/imgUI/imgui_draw.s
-	@echo ... include/imgUI/imgui_impl_glfw.obj
-	@echo ... include/imgUI/imgui_impl_glfw.i
-	@echo ... include/imgUI/imgui_impl_glfw.s
-	@echo ... include/imgUI/imgui_impl_opengl3.obj
-	@echo ... include/imgUI/imgui_impl_opengl3.i
-	@echo ... include/imgUI/imgui_impl_opengl3.s
-	@echo ... include/imgUI/imgui_tables.obj
-	@echo ... include/imgUI/imgui_tables.i
-	@echo ... include/imgUI/imgui_tables.s
-	@echo ... include/imgUI/imgui_widgets.obj
-	@echo ... include/imgUI/imgui_widgets.i
-	@echo ... include/imgUI/imgui_widgets.s
+	@echo ... test_program
+	@echo ... include/Imgui/imgui.obj
+	@echo ... include/Imgui/imgui.i
+	@echo ... include/Imgui/imgui.s
+	@echo ... include/Imgui/imgui_demo.obj
+	@echo ... include/Imgui/imgui_demo.i
+	@echo ... include/Imgui/imgui_demo.s
+	@echo ... include/Imgui/imgui_draw.obj
+	@echo ... include/Imgui/imgui_draw.i
+	@echo ... include/Imgui/imgui_draw.s
+	@echo ... include/Imgui/imgui_impl_glfw.obj
+	@echo ... include/Imgui/imgui_impl_glfw.i
+	@echo ... include/Imgui/imgui_impl_glfw.s
+	@echo ... include/Imgui/imgui_impl_opengl3.obj
+	@echo ... include/Imgui/imgui_impl_opengl3.i
+	@echo ... include/Imgui/imgui_impl_opengl3.s
+	@echo ... include/Imgui/imgui_tables.obj
+	@echo ... include/Imgui/imgui_tables.i
+	@echo ... include/Imgui/imgui_tables.s
+	@echo ... include/Imgui/imgui_widgets.obj
+	@echo ... include/Imgui/imgui_widgets.i
+	@echo ... include/Imgui/imgui_widgets.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/Particle.obj
+	@echo ... src/Particle.i
+	@echo ... src/Particle.s
 	@echo ... src/glad.obj
 	@echo ... src/glad.i
 	@echo ... src/glad.s
+	@echo ... test/main.obj
+	@echo ... test/main.i
+	@echo ... test/main.s
 .PHONY : help
 
 
