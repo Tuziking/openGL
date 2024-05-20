@@ -12,11 +12,11 @@ add_executable(openGL
         ${IMGUI_SRC}
         src/Particle.cpp
 )
-add_executable(test_program
-        src/glad.c
-        test/main.cpp
-        src/Particle.cpp
-)
+#add_executable(test_program
+#        src/glad.c
+#        test/main.cpp
+#        src/Particle.cpp
+#)
 
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
@@ -26,10 +26,10 @@ target_link_libraries(openGL
         ${PROJECT_SOURCE_DIR}/lib/glfw3.dll
         ${PROJECT_SOURCE_DIR}/lib/libassimp-5.dll)
 
-# 让test/main。cpp链接到glfw3.dll
-target_link_libraries(test_program
-        ${PROJECT_SOURCE_DIR}/lib/glfw3.dll
-        ${PROJECT_SOURCE_DIR}/lib/libassimp-5.dll)
+## 让test/main。cpp链接到glfw3.dll
+#target_link_libraries(test_program
+#        ${PROJECT_SOURCE_DIR}/lib/glfw3.dll
+#        ${PROJECT_SOURCE_DIR}/lib/libassimp-5.dll)
 
 
 
