@@ -23,26 +23,26 @@ void DrawMenuUI(Camera& camera, float& scale, ImVec4& backgroundColor){
         backgroundColor = ImVec4(0.0f,0.0f,0.0f,1.0f);
     }
     // 使用调色板来更改背景颜色
-    if (ImGui::ColorPicker4("Background Picker", (float*)&backgroundColor,
+    if (ImGui::ColorPicker4("##UNIQALID", (float*)&backgroundColor,
                             ImGuiColorEditFlags_NoSidePreview | ImGuiColorEditFlags_PickerHueBar,
                             NULL))
     {
         // 如果用户在调色板中选择了颜色，可以在这里处理颜色改变的逻辑
     }
-    ImGui::Text(u8"scale");
-    if (ImGui::SliderFloat("##uniqueID", &scale, -1.0f, 1.0f))
-    {
-        // 当用户滑动滑动条时，这里的代码将被执行，调整大小
-        camera.ProcessMouseScroll(scale);
-    }
-    ImGui::SameLine();
-    // 当按钮被按下时，重置scale的值
-    if (ImGui::Button("Reset"))
-    {
-        // 重置camera的值
-        camera.ProcessMouseScroll(-scale);
-        scale = 0.0f;
-    }
+//    ImGui::Text(u8"scale");
+//    if (ImGui::SliderFloat("##uniqueID", &scale, -1.0f, 1.0f))
+//    {
+//        // 当用户滑动滑动条时，这里的代码将被执行，调整大小
+//        camera.ProcessMouseScroll(scale);
+//    }
+//    ImGui::SameLine();
+//    // 当按钮被按下时，重置scale的值
+//    if (ImGui::Button("Reset"))
+//    {
+//        // 重置camera的值
+//        camera.ProcessMouseScroll(50);
+//        scale = 0.0f;
+//    }
     ImGui::Text(u8"position");
     // 添加三个滑块来控制camera的位置
     float cameraPosition[3] = {camera.Position.x, camera.Position.y, camera.Position.z};

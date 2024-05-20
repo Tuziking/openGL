@@ -23,6 +23,7 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
+unsigned int loadCubemap(vector<std::string> faces);
 
 // 窗口的宽和高
 const unsigned int SCR_WIDTH = 2000;
@@ -104,12 +105,13 @@ int main()
 
 // 初始化Shader 和 model
 #pragma region shader and model
-    stbi_set_flip_vertically_on_load(true);
+//    stbi_set_flip_vertically_on_load(true);
     glEnable(GL_DEPTH_TEST);
     Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
     Model ourModel("../resources/nanosuit/nanosuit.obj");
 #pragma endregion
 
+// todo：修改了白色雪花的黑色背景
 # pragma region particles init
 // 用于判断着色器的GLSL代码是否编译成功
     int success;
@@ -153,8 +155,8 @@ int main()
     glGenerateMipmap(GL_TEXTURE_2D);
 
     stbi_image_free(imageDate);
-//    // 启用OpenGL的深度检测，使绘制的图形更具真实感
-//    glEnable(GL_DEPTH_TEST);
+    // 启用OpenGL的深度检测，使绘制的图形更具真实感
+    glEnable(GL_DEPTH_TEST);
 
     // 初始化粒子系统
     for (unsigned int i = 0; i < PARTICLE_NUM; i++)
@@ -252,7 +254,74 @@ int main()
 // 初始化天空盒
 #pragma region skybox init
 Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
+    float skyboxVertices[] = {
+            // positions
+            -1.0f,  1.0f, -1.0f,
+            -1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
 
+            -1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
+
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+
+            -1.0f, -1.0f,  1.0f,
+            -1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
+
+            -1.0f,  1.0f, -1.0f,
+            1.0f,  1.0f, -1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            -1.0f,  1.0f,  1.0f,
+            -1.0f,  1.0f, -1.0f,
+
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f,  1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f,  1.0f,
+            1.0f, -1.0f,  1.0f
+    };
+    // skybox VAO
+    unsigned int skyboxVAO, skyboxVBO;
+    glGenVertexArrays(1, &skyboxVAO);
+    glGenBuffers(1, &skyboxVBO);
+    glBindVertexArray(skyboxVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // load textures
+    // -------------
+    vector<std::string> faces
+            {
+                    "../resources/texture/skybox/px.png",
+                    "../resources/texture/skybox/nx.png",
+                    "../resources/texture/skybox/py.png",
+                    "../resources/texture/skybox/ny.png",
+                    "../resources/texture/skybox/pz.png",
+                    "../resources/texture/skybox/nz.png",
+            };
+    unsigned int cubemapTexture = loadCubemap(faces);
+    skyboxShader.use();
+    skyboxShader.setInt("skybox", 0);
+#pragma endregion
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 // 循环渲染程序
 #pragma region loop
@@ -274,17 +343,20 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
         ourShader.use();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", view);
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
         ourShader.setMat4("model", model);
+        ourShader.setMat4("projection", projection);
+        ourShader.setMat4("view", view);
         ourModel.Draw(ourShader);
 
         // 渲染雪花粒子
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDepthMask(GL_FALSE); // 禁止写入深度缓冲区
+        glDepthFunc(GL_ALWAYS); // 设置深度测试函数为 GL_ALWAYS，始终通过深度测试
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
         glUniform1i(glGetUniformLocation(program, "ourTexture"), 0);
@@ -307,7 +379,26 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
             glBindVertexArray(0);
         }
         particles = particlesTmp;
+        // 恢复深度测试函数和深度写入状态
+        glDepthFunc(GL_LESS);
+        glDepthMask(GL_TRUE);
         glDisable(GL_BLEND);
+
+
+//        // 渲染天空盒
+        // draw skybox as last
+        glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+        skyboxShader.use();
+        view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
+        skyboxShader.setMat4("view", view);
+        skyboxShader.setMat4("projection", projection);
+        // skybox cube
+        glBindVertexArray(skyboxVAO);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
+        glDepthFunc(GL_LESS); // set depth function back to default
 
         // 2. 解除帧缓冲区绑定，返回默认帧缓冲区
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -351,6 +442,7 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
 // 程序结束后的清理
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &skyboxVAO);
     glfwTerminate();
     return 0;
 }
@@ -390,4 +482,43 @@ void processInput(GLFWwindow *window){
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
+}
+
+// loads a cubemap texture from 6 individual texture faces
+// order:
+// +X (right)
+// -X (left)
+// +Y (top)
+// -Y (bottom)
+// +Z (front)
+// -Z (back)
+// -------------------------------------------------------
+unsigned int loadCubemap(vector<std::string> faces)
+{
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+    int width, height, nrComponents;
+    for (unsigned int i = 0; i < faces.size(); i++)
+    {
+        unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrComponents, 0);
+        if (data)
+        {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            stbi_image_free(data);
+        }
+        else
+        {
+            std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+            stbi_image_free(data);
+        }
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return textureID;
 }
