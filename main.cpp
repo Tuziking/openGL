@@ -51,34 +51,6 @@ unsigned int fbo, fboTexture;
 // texture：纹理
 unsigned int VAO, VBO, program, texture;
 const int PARTICLE_NUM = 1000;
-// 顶点着色器的GLSL代码
-const char *vertexShaderSource = "#version 330 core\n"
-                                 "layout (location = 0) in vec3 aPos;\n"
-                                 "layout (location = 1) in vec2 aTexCoord;\n"
-
-                                 "out vec2 TexCoord;\n"
-
-                                 "uniform mat4 model;\n"
-                                 "uniform mat4 view;\n"
-                                 "uniform mat4 proj;\n"
-
-                                 "void main()\n"
-                                 "{\n"
-                                 "    gl_Position = proj * view * model * vec4(aPos, 1.0);\n"
-                                 "    TexCoord = vec2(aTexCoord.x, aTexCoord.y);\n"
-                                 "}\n\0";
-// 片段着色器的GLSL代码
-const char *fragmentShaderSource = "#version 330 core\n"
-                                   "out vec4 FragColor;\n"
-
-                                   "in vec2 TexCoord;\n"
-
-                                   "uniform sampler2D ourTexture;\n"
-
-                                   "void main()\n"
-                                   "{\n"
-                                   "    FragColor = texture(ourTexture, TexCoord);\n"
-                                   "}\n\0";
 // particles：存储所有粒子
 // particlesTmp：用于存储一个时间间隔后还未消亡的粒子和它们的新状态
 std::vector<Particle> particles, particlesTmp;
@@ -141,51 +113,7 @@ int main()
 # pragma region particles init
 // 用于判断着色器的GLSL代码是否编译成功
     int success;
-
-    // 创建顶点着色器
-    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    // 指定顶点着色器的源代码
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    // 编译顶点着色器
-    glCompileShader(vertexShader);
-    // 获取顶点着色器的编译状态
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    // 如果顶点着色器编译失败，输出相关信息并退出程序
-    if (!success) {
-        std::cout << "Failed to compile vertex shader source" << std::endl;
-        exit(0);
-    }
-
-    // 创建片段着色器
-    unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    // 指定片段着色器的源代码
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    // 编译片段着色器
-    glCompileShader(fragmentShader);
-    // 获取片段着色器的编译状态
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    // 如果片段着色器编译失败，输出相关信息并退出程序
-    if (!success) {
-        std::cout << "Failed to compile fragment shader source" << std::endl;
-        exit(0);
-    }
-
-    // 创建着色器程序
-    program = glCreateProgram();
-    // 将顶点着色器和片段着色器链接到着色器程序
-    glAttachShader(program, vertexShader);
-    glAttachShader(program, fragmentShader);
-    glLinkProgram(program);
-    // 获取着色器程序的链接状态
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    // 如果着色器程序链接失败，输出相关信息并退出程序
-    if(!success) {
-        std::cout << "Failed to link program" << std::endl;
-        exit(0);
-    }
-    // 链接完成后，可以删除顶点着色器和片段着色器
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    Shader snowShader("../Shaders/snow_shader.vs", "../Shaders/snow_shader.fs");
 
     // 生成顶点数组对象和顶点缓冲对象
     glGenVertexArrays(1, &VAO);
@@ -224,6 +152,7 @@ int main()
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageDate);
     glGenerateMipmap(GL_TEXTURE_2D);
 
+    stbi_image_free(imageDate);
     // 启用OpenGL的深度检测，使绘制的图形更具真实感
     glEnable(GL_DEPTH_TEST);
 
@@ -320,8 +249,10 @@ int main()
 //    float f = 0.0f;
 #pragma endregion
 
-    ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 
+
+
+    ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 // 循环渲染程序
 #pragma region loop
     while (!glfwWindowShouldClose(window))
@@ -351,15 +282,22 @@ int main()
         ourModel.Draw(ourShader);
 
         // 渲染雪花粒子
-        glUseProgram(program);
-        glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glUniform1i(glGetUniformLocation(program, "ourTexture"), 0);
+//        glUseProgram(program);
+        snowShader.use();
+        snowShader.setMat4("view", view);
+        snowShader.setMat4("proj", projection);
+//        glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+//        glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_FALSE, glm::value_ptr(projection));
         particlesTmp.clear();
         for (unsigned int i = 0; i < particles.size(); i++) {
             glm::mat4 model1 = glm::mat4(1.0f);
             particles[i].update(glfwGetTime());
             model1 = glm::translate(model1, particles[i].getX());
-            glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, glm::value_ptr(model1));
+//            glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, glm::value_ptr(model1));
+            snowShader.setMat4("model", model1);
             if (particles[i].exist())
                 particlesTmp.push_back(particles[i]);
             else
@@ -381,16 +319,17 @@ int main()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
         ImGui::DockSpaceOverViewport();
-
-        ImGui::ShowDemoWindow();
         DrawGUI();
 
+        // 绘制3D渲染的界面
         ImGui::Begin("Scene");
         // 将 fbo 的纹理传递给 ImGui 显示
         ImGui::Image((void*)(intptr_t)fboTexture, ImVec2(SCR_WIDTH, SCR_HEIGHT), ImVec2(0, 1), ImVec2(1, 0));
         ImGui::End();
 
+        // 绘制底部数据展示界面
         DrawDebugUI(camera.Position);
+        // 绘制菜单界面
         DrawMenuUI(camera, scale, clear_color);
 
         ImGui::Render();
