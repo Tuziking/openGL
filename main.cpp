@@ -150,7 +150,8 @@ int main()
 //    stbi_set_flip_vertically_on_load(true);
     glEnable(GL_DEPTH_TEST);
     // Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
-    Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
+    // Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
+    Shader ourShader("../resources/shader/vertex.fs", "../resources/shader/fragment.fs");
     // Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
 
     Model ourModel("../resources/nanosuit/nanosuit.obj");
@@ -617,9 +618,9 @@ void loadLight(Shader& ourShader, glm::mat4 projection, glm::mat4 view, glm::mat
     ourShader.setVec3("viewPos", camera.Position);
     ourShader.setFloat("material.shininess", 32.0f);
     ourShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
-    ourShader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
-    ourShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
-    ourShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+    ourShader.setVec3("dirLight.ambient", 0.2f, 0.2f, 0.2f);
+    ourShader.setVec3("dirLight.diffuse", 0.8f, 0.8f, 0.8f);
+    ourShader.setVec3("dirLight.specular", 1.5f, 1.5f, 1.5f);
     // point light 1
     ourShader.setVec3("pointLights[0].position", pointLightPositions[0]);
     ourShader.setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
