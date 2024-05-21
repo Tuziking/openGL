@@ -27,6 +27,9 @@ unsigned int loadCubemap(vector<std::string> faces);
 void loadModel(Shader shader, Model model, glm::mat4 modelMatrix, glm::mat4 view, glm::mat4 projection);
 void loadSkybox(Shader shader, unsigned int skyboxVAO, unsigned int cubemapTexture, glm::mat4 view, glm::mat4 projection);
 void loadSnow(Shader shader, unsigned int VAO, unsigned int texture, std::vector<Particle>& particles, glm::mat4 view, glm::mat4 projection);
+unsigned int loadTexture(char const * path);
+void loadLight(Shader& lightShader, glm::mat4 projection, glm::mat4 view, glm::mat4 model, Model model1);
+
 // 窗口的宽和高
 const unsigned int SCR_WIDTH = 2000;
 const unsigned int SCR_HEIGHT = 1000;
@@ -46,6 +49,17 @@ float scale = 0.0f; // 用于存储滑动条的值
 
 // FBO and FBO texture
 unsigned int fbo, fboTexture;
+
+// light
+unsigned int loadTexture(char const * path);
+glm::vec3 pointLightPositions[] = {
+        glm::vec3( 0.7f,  0.2f,  2.0f),
+        glm::vec3( 2.3f, -3.3f, -4.0f),
+        glm::vec3(-4.0f,  2.0f, -12.0f),
+        glm::vec3( 0.0f,  0.0f, -3.0f)
+};
+
+
 
 # pragma region particles paraments
 // VAO：顶点数组对象
@@ -67,6 +81,7 @@ float vertices[] = {
         -0.01f, -0.01f, -0.01f, 0.0f, 0.0f
 };
 # pragma endregion
+
 #pragma region skybox faces
     vector<std::string> faces1
             {
@@ -136,15 +151,13 @@ int main()
     glEnable(GL_DEPTH_TEST);
     // Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
     Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
+    Shader lightingShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
+
     Model ourModel("../resources/nanosuit/nanosuit.obj");
-
-
     std::vector<rending> models;
-
     //chair
     Model chair("../resources/models/chair/chair.obj");
     models.push_back(rending{chair,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
-
     //tree
     Model tree("../resources/models/tree/tree.obj");
     models.push_back(rending{tree,glm::vec3(3.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
@@ -290,6 +303,9 @@ int main()
 //    float f = 0.0f;
 #pragma endregion
 
+    lightingShader.use();
+    lightingShader.setInt("material.diffuse", 0);
+    lightingShader.setInt("material.specular", 1);
 // 初始化天空盒
 #pragma region skybox init
 Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
@@ -372,6 +388,8 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
 
+        // 渲染光源
+        loadLight(lightingShader, projection, view, model, ourModel);
 
         // 渲染 3D 模型
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
@@ -586,5 +604,64 @@ void loadSnow(Shader snowShader,
         glDepthFunc(GL_LESS);
         glDepthMask(GL_TRUE);
         glDisable(GL_BLEND);
+}
+
+void loadLight(Shader& lightingShader, glm::mat4 projection, glm::mat4 view, glm::mat4 model, Model model1){
+    lightingShader.use();
+    lightingShader.setVec3("viewPos", camera.Position);
+    lightingShader.setFloat("material.shininess", 32.0f);
+    lightingShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
+    lightingShader.setVec3("dirLight.ambient", 0.05f, 0.05f, 0.05f);
+    lightingShader.setVec3("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
+    lightingShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+    // point light 1
+    lightingShader.setVec3("pointLights[0].position", pointLightPositions[0]);
+    lightingShader.setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
+    lightingShader.setVec3("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
+    lightingShader.setVec3("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
+    lightingShader.setFloat("pointLights[0].constant", 1.0f);
+    lightingShader.setFloat("pointLights[0].linear", 0.09f);
+    lightingShader.setFloat("pointLights[0].quadratic", 0.032f);
+    // point light 2
+    lightingShader.setVec3("pointLights[1].position", pointLightPositions[1]);
+    lightingShader.setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
+    lightingShader.setVec3("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
+    lightingShader.setVec3("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
+    lightingShader.setFloat("pointLights[1].constant", 1.0f);
+    lightingShader.setFloat("pointLights[1].linear", 0.09f);
+    lightingShader.setFloat("pointLights[1].quadratic", 0.032f);
+    // point light 3
+    lightingShader.setVec3("pointLights[2].position", pointLightPositions[2]);
+    lightingShader.setVec3("pointLights[2].ambient", 0.05f, 0.05f, 0.05f);
+    lightingShader.setVec3("pointLights[2].diffuse", 0.8f, 0.8f, 0.8f);
+    lightingShader.setVec3("pointLights[2].specular", 1.0f, 1.0f, 1.0f);
+    lightingShader.setFloat("pointLights[2].constant", 1.0f);
+    lightingShader.setFloat("pointLights[2].linear", 0.09f);
+    lightingShader.setFloat("pointLights[2].quadratic", 0.032f);
+    // point light 4
+    lightingShader.setVec3("pointLights[3].position", pointLightPositions[3]);
+    lightingShader.setVec3("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
+    lightingShader.setVec3("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
+    lightingShader.setVec3("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
+    lightingShader.setFloat("pointLights[3].constant", 1.0f);
+    lightingShader.setFloat("pointLights[3].linear", 0.09f);
+    lightingShader.setFloat("pointLights[3].quadratic", 0.032f);
+    // spotLight
+    lightingShader.setVec3("spotLight.position", camera.Position);
+    lightingShader.setVec3("spotLight.direction", camera.Front);
+    lightingShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
+    lightingShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
+    lightingShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
+    lightingShader.setFloat("spotLight.constant", 1.0f);
+    lightingShader.setFloat("spotLight.linear", 0.09f);
+    lightingShader.setFloat("spotLight.quadratic", 0.032f);
+    lightingShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+    lightingShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
+
+    lightingShader.setMat4("projection", projection);
+    lightingShader.setMat4("view", view);
+    lightingShader.setMat4("model", model);
+
+    model1.Draw(lightingShader);
 }
 
