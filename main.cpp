@@ -88,6 +88,12 @@ vector<std::string> faces2
         };
 #pragma endregion
 
+struct rending {
+    Model model;
+    glm::vec3 pos;
+    glm::vec3 scale;
+};
+
 int main()
 {
 
@@ -128,8 +134,20 @@ int main()
 #pragma region shader and model
 //    stbi_set_flip_vertically_on_load(true);
     glEnable(GL_DEPTH_TEST);
-    Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
+    // Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
+    Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
     Model ourModel("../resources/nanosuit/nanosuit.obj");
+
+
+    std::vector<rending> models;
+
+    //chair
+    Model chair("../resources/models/chair/chair.obj");
+    models.push_back(rending{chair,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
+    //tree
+    Model tree("../resources/models/tree/tree.obj");
+    models.push_back(rending{tree,glm::vec3(3.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
 #pragma endregion
 
 // 雪花粒子初始化
@@ -363,6 +381,13 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
         model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
         loadModel(ourShader, ourModel, model, view, projection);
+
+        // 渲染3D模型列表
+        for(rending& r : models) {
+            model = glm::translate(model, r.pos);
+            model = glm::scale(model, r.scale);
+            loadModel(ourShader, r.model, model, view, projection);
+        }
 
         // 渲染雪花粒子
         loadSnow(snowShader, VAO, texture, particles, view, projection);

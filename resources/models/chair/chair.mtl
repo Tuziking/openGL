@@ -1,0 +1,84 @@
+# Blender MTL File: 'chair.blend'
+# Material Count: 7
+
+newmtl Material.000
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.330027 0.023709
+Ks 0.523636 0.523636 0.523636
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd A0_color.png
+map_Ks A0_spec.png
+
+newmtl Material.001
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.374926 0.800000 0.145232
+Ks 0.000000 0.000000 0.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl Material.002
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.481037 0.224945 0.054886
+Ks 0.508455 0.508455 0.508455
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd A2_color.png
+map_Ks A2_spec.exr
+
+newmtl Material.003
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.330027 0.023709
+Ks 0.523636 0.523636 0.523636
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd A3_color.png
+map_Ks A3_spec.png
+
+newmtl Material.004
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.330027 0.023709
+Ks 1.000000 1.000000 1.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd A4_color.png
+map_Ks A4_spec.png
+
+newmtl Material.005
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.644974 0.800000 0.139517
+Ks 1.000000 1.000000 1.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd A13_color.png
+map_Ks A13_rough.png
+
+newmtl Material.006
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.467784 0.799103 0.187821
+Ks 0.000000 0.000000 0.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd A12_color.png
+map_Ks .

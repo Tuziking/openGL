@@ -1,0 +1,104 @@
+# Blender MTL File: 'snowman.blend'
+# Material Count: 9
+
+newmtl Material
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.980000 0.980000
+Ks 1.000000 1.000000 1.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd snow_head_color.png
+map_Ks A_spec.png
+
+newmtl Material.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd .
+
+newmtl Material.003
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.793425 0.164359 0.038377
+Ks 0.000000 0.000000 0.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd snow_nose_color.png
+map_Ks A3_spec.png
+
+newmtl Material.004
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.083031 0.018125 0.005226
+Ks 0.000000 0.000000 0.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd brunch_r_color.png
+map_Ks A4_spec.001.png
+
+newmtl Material.005
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.980000 0.980000
+Ks 1.000000 1.000000 1.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd snow_middle_color.png
+map_Ks A5_spec.png
+
+newmtl Material.006
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 0.980000 0.980000
+Ks 0.000000 0.000000 0.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd snow_bottom_color.png
+map_Ks A6_spec.png
+
+newmtl Material.007
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.083031 0.018125 0.005226
+Ks 1.000000 1.000000 1.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd brunch_left.png
+map_Ks A7_spec.001.png
+
+newmtl Material.008
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd .
+
+newmtl None
+Ns 500
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2

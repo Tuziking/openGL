@@ -1,0 +1,122 @@
+# Blender MTL File: 'CabinRustic.blend'
+# Material Count: 10
+
+newmtl BackWall.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tex\\BackWall.png.001.png
+map_Ks tex\\BackWall_s.png.001.png
+map_Ns tex\\BackWall_d.png.001.png
+
+newmtl CherryPlywood.001
+Ns 81.000006
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.590000 0.590000 0.590000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Ks tex\\Panel Cherry_AO.jpg.001.jpg
+map_Ns tex\\Panel Cherry_Rou.jpg.001.jpg
+
+newmtl Door
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.285205 0.192830 0.099863
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl Floor
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Bump -bm 0.025000 tex\\Floor_hn.png
+map_Ks tex\\Floor_s.png
+map_Ns tex\\FloorRough.png.001.png
+
+newmtl FrontWall01.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tex\\FrontWall.png.001.png
+map_Ks tex\\FrontWall_s.png.001.png
+map_Ns tex\\FrontWall_d.png.001.png
+
+newmtl Glass.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl LeftWall.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tex\\LeftWall.png.001.png
+map_Ks tex\\LeftWall_s.png.001.png
+map_Ns tex\\LeftWall_d.png.001.png
+
+newmtl RightWall.001
+Ns 15.999998
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd tex\\RightWall.png.001.png
+map_Ns tex\\RightWall_d.png.001.png
+
+newmtl RoofEdging.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Ns textures\\TexturesCom_RoughBronze_512_roughness.tif.001.tif
+
+newmtl Shingles.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd textures\\RoofTop_color.png
+map_Ks -s 5.000000 5.000000 1.000000 textures\\Roof01_s.png.001.png
+map_Ns -s 5.000000 5.000000 1.000000 textures\\Roof01_d.png.001.png
