@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <learnopengl/shader_m.h>
+#include <learnopengl/shader.h>
 #include <learnopengl/camera.h>
 #include <learnopengl/model.h>
 
@@ -29,6 +29,8 @@ void loadSkybox(Shader shader, unsigned int skyboxVAO, unsigned int cubemapTextu
 void loadSnow(Shader shader, unsigned int VAO, unsigned int texture, std::vector<Particle>& particles, glm::mat4 view, glm::mat4 projection);
 unsigned int loadTexture(char const * path);
 void loadLight(Shader& lightShader, glm::mat4 projection, glm::mat4 view, glm::mat4 model, Model model1);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 // 窗口的宽和高
 const unsigned int SCR_WIDTH = 2000;
@@ -50,6 +52,78 @@ float scale = 0.0f; // 用于存储滑动条的值
 // FBO and FBO texture
 unsigned int fbo, fboTexture;
 
+unsigned int cubeVAO = 0;
+unsigned int cubeVBO = 0;
+void renderCube()
+{
+    // initialize (if necessary)
+    if (cubeVAO == 0)
+    {
+        float vertices[] = {
+                // back face
+                -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+                1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+                1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 0.0f, // bottom-right
+                1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 1.0f, 1.0f, // top-right
+                -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 0.0f, // bottom-left
+                -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, -1.0f, 0.0f, 1.0f, // top-left
+                // front face
+                -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+                1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 0.0f, // bottom-right
+                1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+                1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f, 1.0f, // top-right
+                -1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 1.0f, // top-left
+                -1.0f, -1.0f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f, 0.0f, // bottom-left
+                // left face
+                -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+                -1.0f,  1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-left
+                -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+                -1.0f, -1.0f, -1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-left
+                -1.0f, -1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+                -1.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-right
+                // right face
+                1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+                1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+                1.0f,  1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 1.0f, // top-right
+                1.0f, -1.0f, -1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 1.0f, // bottom-right
+                1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 1.0f, 0.0f, // top-left
+                1.0f, -1.0f,  1.0f,  1.0f,  0.0f,  0.0f, 0.0f, 0.0f, // bottom-left
+                // bottom face
+                -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+                1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 1.0f, // top-left
+                1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+                1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 1.0f, 0.0f, // bottom-left
+                -1.0f, -1.0f,  1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 0.0f, // bottom-right
+                -1.0f, -1.0f, -1.0f,  0.0f, -1.0f,  0.0f, 0.0f, 1.0f, // top-right
+                // top face
+                -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+                1.0f,  1.0f , 1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+                1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 1.0f, // top-right
+                1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // bottom-right
+                -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 1.0f, // top-left
+                -1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f  // bottom-left
+        };
+        glGenVertexArrays(1, &cubeVAO);
+        glGenBuffers(1, &cubeVBO);
+        // fill buffer
+        glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        // link vertex attributes
+        glBindVertexArray(cubeVAO);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArray(0);
+    }
+    // render Cube
+    glBindVertexArray(cubeVAO);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
+}
 // light
 unsigned int loadTexture(char const * path);
 glm::vec3 pointLightPositions[] = {
@@ -109,11 +183,61 @@ struct rending {
     glm::vec3 scale;
 };
 
+void renderScene(const Shader &shader,std::vector<auto> models,glm::mat4 view,glm::mat4 projection)
+{
+    // room cube
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::scale(model, glm::vec3(5.0f));
+    shader.setMat4("model", model);
+    glDisable(GL_CULL_FACE); // note that we disable culling here since we render 'inside' the cube instead of the usual 'outside' which throws off the normal culling methods.
+    shader.setInt("reverse_normals", 1); // A small little hack to invert normals when drawing cube from the inside so lighting still works.
+    // renderCube();
+    shader.setInt("reverse_normals", 0); // and of course disable it
+    glEnable(GL_CULL_FACE);
+    //
+    //
+    //
+    // // cubes
+    // model = glm::mat4(1.0f);
+    // model = glm::translate(model, glm::vec3(4.0f, -3.5f, 0.0));
+    // model = glm::scale(model, glm::vec3(0.5f));
+    // shader.setMat4("model", model);
+    // renderCube();
+    // model = glm::mat4(1.0f);
+    // model = glm::translate(model, glm::vec3(2.0f, 3.0f, 1.0));
+    // model = glm::scale(model, glm::vec3(0.75f));
+    // shader.setMat4("model", model);
+    // renderCube();
+    // model = glm::mat4(1.0f);
+    // model = glm::translate(model, glm::vec3(-3.0f, -1.0f, 0.0));
+    // model = glm::scale(model, glm::vec3(0.5f));
+    // shader.setMat4("model", model);
+    // renderCube();
+    // model = glm::mat4(1.0f);
+    // model = glm::translate(model, glm::vec3(-1.5f, 1.0f, 1.5));
+    // model = glm::scale(model, glm::vec3(0.5f));
+    // shader.setMat4("model", model);
+    // renderCube();
+    // model = glm::mat4(1.0f);
+    // model = glm::translate(model, glm::vec3(-1.5f, 2.0f, -3.0));
+    // model = glm::rotate(model, glm::radians(60.0f), glm::normalize(glm::vec3(1.0, 0.0, 1.0)));
+    // model = glm::scale(model, glm::vec3(0.75f));
+    // shader.setMat4("model", model);
+    // renderCube();
+
+    //models
+    for(rending& r : models) {
+        model = glm::mat4(5.0f);
+        model = glm::translate(model,r.pos);
+        model = glm::scale(model,r.scale);
+        shader.setMat4("model", model);
+        loadModel(shader, r.model, model, view, projection);
+    }
+}
+
 int main()
 {
-
     const char* glsl_version = "#version 330";
-
 // 初始化glfw的窗口
 #pragma region glfw init
     glfwInit();
@@ -133,6 +257,10 @@ int main()
         return -1;
     }
 
+    // tell GLFW to capture our mouse
+//    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+//    glfwSetCursorPosCallback(window, mouse_callback);
+//    glfwSetScrollCallback(window, scroll_callback);
     // 基于控制权
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -151,229 +279,310 @@ int main()
     glEnable(GL_DEPTH_TEST);
     // Shader ourShader("../Shaders/1.model_loading.vs", "../Shaders/1.model_loading.fs");
     // Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
-    Shader ourShader("../resources/shader/vertex.fs", "../resources/shader/fragment.fs");
-    // Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
+    // Shader ourShader("../resources/shader/vertex.fs", "../resources/shader/fragment.fs");
+    // Shader ourShader("../resources/shader/newShader/shader_v.fs", "../resources/shader/newShader/shader_f.fs");
+    Shader ourShader("../resources/shader/multiple_v.fs", "../resources/shader/multiple_f.fs");
 
-    Model ourModel("../resources/nanosuit/nanosuit.obj");
+//    Model ourModel("../resources/nanosuit/nanosuit.obj");
+    Model ourModel("../resources/models/land/land.obj");
     std::vector<rending> models;
 
     //land
     Model land("../resources/models/land/land.obj");
-    models.push_back(rending{land,  glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
-
+    models.push_back(rending{land,  glm::vec3(-60.0f,0.0f,-10.0f),glm::vec3(1000.0f,1000.0f,1000.0f)});
 
     //chair
     Model chair("../resources/models/chair/chair.obj");
-    models.push_back(rending{chair,glm::vec3(0.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
-    //tree
+    models.push_back(rending{chair,glm::vec3(0.0f,1.1f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
+    // tree
     Model tree("../resources/models/tree/tree.obj");
-    models.push_back(rending{tree,glm::vec3(3.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
+    models.push_back(rending{tree,glm::vec3(20.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
+    // // tree2
+    // Model tree2("../resources/models/tree/tree.obj");
+    // models.push_back(rending{tree2,glm::vec3(0.0f,0.0f,5.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
+    // tree3
+    Model tree3("../resources/models/tree/tree.obj");
+    models.push_back(rending{tree3,glm::vec3(15.0f,0.0f,16.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
+    // tree4
+    Model tree4("../resources/models/tree/tree.obj");
+    models.push_back(rending{tree4,glm::vec3(0.0f,0.0f,10.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
+
+    //fireplace
+    Model fireplace("../resources/models/fireplace/fireplace.obj");
+    models.push_back(rending{fireplace,glm::vec3(2.0f,2.0f,-5.8f),glm::vec3(0.3f,0.3f,0.3f)});
+
+    //rustic-cabin
+    Model rustic("../resources/models/rustic-cabin/CabinRustic.obj");
+    models.push_back(rending{rustic,glm::vec3(0.0f,-3.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
+    //snowman
+    Model snowman("../resources/models/snowman/snowman.obj");
+    models.push_back(rending{snowman,glm::vec3(3.0f,0.0f,8.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
+    //snowman-bili
+    Model bili("../resources/models/snowman-bili/snowman-bili.obj");
+    models.push_back(rending{bili,glm::vec3(3.0f,0.0f,12.0f),glm::vec3(1.0f,1.0f,1.0f)});
+
 #pragma endregion
 
 // 雪花粒子初始化
 # pragma region particles init
-// 用于判断着色器的GLSL代码是否编译成功
-    int success;
-    Shader snowShader("../Shaders/snow_shader.vs", "../Shaders/snow_shader.fs");
+ // 用于判断着色器的GLSL代码是否编译成功
+     int success;
+     Shader snowShader("../Shaders/snow_shader.vs", "../Shaders/snow_shader.fs");
 
-    // 生成顶点数组对象和顶点缓冲对象
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+     // 生成顶点数组对象和顶点缓冲对象
+     glGenVertexArrays(1, &VAO);
+     glGenBuffers(1, &VBO);
 
-    // 绑定顶点数组对象
-    glBindVertexArray(VAO);
-    // 绑定顶点缓冲对象，并将顶点信息传入其中
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+     // 绑定顶点数组对象
+     glBindVertexArray(VAO);
+     // 绑定顶点缓冲对象，并将顶点信息传入其中
+     glBindBuffer(GL_ARRAY_BUFFER, VBO);
+     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    // 按照vertices中数据的定义对顶点数组对象进行设置
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) 0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+     // 按照vertices中数据的定义对顶点数组对象进行设置
+     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) 0);
+     glEnableVertexAttribArray(0);
+     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (3 * sizeof(float)));
+     glEnableVertexAttribArray(1);
 
-    // width：纹理文件的宽度
-    // height：纹理文件的高度
-    // channelNum：纹理文件的颜色通道数
-    int width, height, channelNum;
-    // 纹理文件的图像数据
-    unsigned char *imageDate;
-    // 使用stb_image.h库中读取纹理文件的相关属性和图像数据
-    imageDate = stbi_load("../resources/texture/snowflower.png", &width, &height, &channelNum, STBI_rgb_alpha);
-    // 生成纹理
-    glGenTextures(1, &texture);
-    // 绑定纹理
-    glBindTexture(GL_TEXTURE_2D, texture);
-    // 设置纹理的属性
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // 将从文件中读取的纹理数据传入
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageDate);
-    glGenerateMipmap(GL_TEXTURE_2D);
+     // width：纹理文件的宽度
+     // height：纹理文件的高度
+     // channelNum：纹理文件的颜色通道数
+     int width, height, channelNum;
+     // 纹理文件的图像数据
+     unsigned char *imageDate;
+     // 使用stb_image.h库中读取纹理文件的相关属性和图像数据
+     imageDate = stbi_load("../resources/texture/snowflower.png", &width, &height, &channelNum, STBI_rgb_alpha);
+     // 生成纹理
+     glGenTextures(1, &texture);
+     // 绑定纹理
+     glBindTexture(GL_TEXTURE_2D, texture);
+     // 设置纹理的属性
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+     // 将从文件中读取的纹理数据传入
+     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageDate);
+     glGenerateMipmap(GL_TEXTURE_2D);
 
-    stbi_image_free(imageDate);
-    // 启用OpenGL的深度检测，使绘制的图形更具真实感
-    glEnable(GL_DEPTH_TEST);
+     stbi_image_free(imageDate);
+     // 启用OpenGL的深度检测，使绘制的图形更具真实感
+     glEnable(GL_DEPTH_TEST);
 
-    // 初始化粒子系统
-    for (unsigned int i = 0; i < PARTICLE_NUM; i++)
-        particles.push_back(Particle(glfwGetTime(), true));
+     // 初始化粒子系统
+     for (unsigned int i = 0; i < PARTICLE_NUM; i++)
+         particles.push_back(Particle(glfwGetTime(), true));
 #pragma endregion
 
 // 导入纹理
 #pragma region texture
 
-    // 创建 FBO
-    glGenFramebuffers(1, &fbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+     // 创建 FBO
+     glGenFramebuffers(1, &fbo);
+     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-    // 创建 FBO 纹理
-    glGenTextures(1, &fboTexture);
-    glBindTexture(GL_TEXTURE_2D, fboTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture, 0);
+     // 创建 FBO 纹理
+     glGenTextures(1, &fboTexture);
+     glBindTexture(GL_TEXTURE_2D, fboTexture);
+     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture, 0);
 
-    // 创建 Renderbuffer 对象用于深度和模板测试
-    unsigned int rbo;
-    glGenRenderbuffers(1, &rbo);
-    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+     // 创建 Renderbuffer 对象用于深度和模板测试
+     unsigned int rbo;
+     glGenRenderbuffers(1, &rbo);
+     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
+     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+         std::cout << "Framebuffer is not complete!" << std::endl;
+     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+#pragma endregion
+
+#pragma region shade into
+    // glEnable(GL_DEPTH_TEST);
+    // glEnable(GL_CULL_FACE);
+    Shader shader("../resources/shader/newShader/shader_v.fs", "../resources/shader/newShader/shader_f.fs");
+    // Shader shader("../Shaders/3.2.2.point_shadows.vs", "../Shaders/3.2.2.point_shadows.fs");
+    Shader simpleDepthShader("../Shaders/3.2.2.point_shadows_depth.vs", "../Shaders/3.2.2.point_shadows_depth.fs", "../Shaders/3.2.2.point_shadows_depth.gs");
+    // load textures
+    // -------------
+    unsigned int woodTexture = loadTexture("../resources/texture/wood/wood.png");
+
+    // configure depth map FBO
+    // -----------------------
+    const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+    GLuint depthMapFBO;
+    glGenFramebuffers(1, &depthMapFBO);
+    // create depth cubemap texture
+    GLuint depthCubemap;
+    glGenTextures(1, &depthCubemap);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
+    for (unsigned int i = 0; i < 6; ++i)
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    // attach depth texture as FBO's depth buffer
+    glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthCubemap, 0);
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        std::cout << "Framebuffer is not complete!" << std::endl;
+        std::cout << "Framebuffer not complete!" << std::endl;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+    // shader configuration
+    // --------------------
+    shader.use();
+    shader.setInt("diffuseTexture", 0);
+    shader.setInt("depthMap", 1);
 #pragma endregion
 
 // 初始化ImGui
 #pragma region ImGui init
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext(nullptr);
-    // 获取 io, 设置ImGui的内容
-    ImGuiIO& io = ImGui::GetIO();
-    (void)io;
-    io.Fonts->AddFontFromFileTTF("../resources/fonts/kaiu.ttf", 24, nullptr, io.Fonts->GetGlyphRangesChineseFull());
-    //允許停靠
-    io.ConfigFlags  |= ImGuiConfigFlags_DockingEnable;
-    //視口設置無裝飾
-    io.ConfigFlags |= ImGuiViewportFlags_NoDecoration;
-    //允許視口停靠
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-    //停靠於背景
-    io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
+     IMGUI_CHECKVERSION();
+     ImGui::CreateContext(nullptr);
+     // 获取 io, 设置ImGui的内容
+     ImGuiIO& io = ImGui::GetIO();
+     (void)io;
+     io.Fonts->AddFontFromFileTTF("../resources/fonts/kaiu.ttf", 24, nullptr, io.Fonts->GetGlyphRangesChineseFull());
+     //允許停靠
+     io.ConfigFlags  |= ImGuiConfigFlags_DockingEnable;
+     //視口設置無裝飾
+     io.ConfigFlags |= ImGuiViewportFlags_NoDecoration;
+     //允許視口停靠
+     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+     //停靠於背景
+     io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
 
 
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
-    ImGui::StyleColorsDark();
-    ImGuiStyle &style = ImGui::GetStyle();
+     ImGui_ImplGlfw_InitForOpenGL(window, true);
+     ImGui_ImplOpenGL3_Init(glsl_version);
+     ImGui::StyleColorsDark();
+     ImGuiStyle &style = ImGui::GetStyle();
 
-    ImVec4* colors = style.Colors;
-    colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.16f, 0.17f, 1.00f);
-    colors[ImGuiCol_FrameBgHovered] = ImVec4(0.37f, 0.36f, 0.36f, 102.00f);
-    colors[ImGuiCol_FrameBgActive] = ImVec4(0.10f, 0.10f, 0.10f, 171.00f);
-    colors[ImGuiCol_TitleBgActive] = ImVec4(0.20f, 0.20f, 0.20f, 255.00f);
-    colors[ImGuiCol_CheckMark] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
-    colors[ImGuiCol_SliderGrab] = ImVec4(0.64f, 0.64f, 0.64f, 1.00f);
-    colors[ImGuiCol_SliderGrabActive] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
-    colors[ImGuiCol_Button] = ImVec4(0.22f, 0.22f, 0.22f, 0.40f);
-    colors[ImGuiCol_ButtonHovered] = ImVec4(0.29f, 0.29f, 0.29f, 1.00f);
-    colors[ImGuiCol_ButtonActive] = ImVec4(0.13f, 0.13f, 0.13f, 1.00f);
-    colors[ImGuiCol_Header] = ImVec4(0.45f, 0.45f, 0.45f, 0.31f);
-    colors[ImGuiCol_HeaderHovered] = ImVec4(0.55f, 0.55f, 0.55f, 0.80f);
-    colors[ImGuiCol_HeaderActive] = ImVec4(0.09f, 0.09f, 0.09f, 1.00f);
-    colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.20f);
-    colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.46f, 0.46f, 0.46f, 0.67f);
-    colors[ImGuiCol_ResizeGripActive] = ImVec4(0.17f, 0.17f, 0.17f, 0.95f);
-    colors[ImGuiCol_SeparatorActive] = ImVec4(0.42f, 0.42f, 0.42f, 1.00f);
-    colors[ImGuiCol_SeparatorHovered] = ImVec4(0.50f, 0.50f, 0.50f, 0.78f);
-    colors[ImGuiCol_TabHovered] = ImVec4(0.45f, 0.45f, 0.45f, 0.80f);
-    colors[ImGuiCol_TabActive] = ImVec4(0.28f, 0.28f, 0.28f, 1.00f);
-    colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
-    colors[ImGuiCol_DockingPreview] = ImVec4(0.51f, 0.51f, 0.51f, 0.70f);
-    colors[ImGuiCol_Tab] = ImVec4(0.21f, 0.21f, 0.21f, 0.86f);
-    colors[ImGuiCol_TabUnfocused] = ImVec4(0.15f, 0.15f, 0.15f, 0.97f);
-    colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.40f, 0.13f, 1.00f);
-    colors[ImGuiCol_TextSelectedBg] = ImVec4(0.45f, 1.00f, 0.85f, 0.35f);
+     ImVec4* colors = style.Colors;
+     colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.16f, 0.17f, 1.00f);
+     colors[ImGuiCol_FrameBgHovered] = ImVec4(0.37f, 0.36f, 0.36f, 102.00f);
+     colors[ImGuiCol_FrameBgActive] = ImVec4(0.10f, 0.10f, 0.10f, 171.00f);
+     colors[ImGuiCol_TitleBgActive] = ImVec4(0.20f, 0.20f, 0.20f, 255.00f);
+     colors[ImGuiCol_CheckMark] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+     colors[ImGuiCol_SliderGrab] = ImVec4(0.64f, 0.64f, 0.64f, 1.00f);
+     colors[ImGuiCol_SliderGrabActive] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
+     colors[ImGuiCol_Button] = ImVec4(0.22f, 0.22f, 0.22f, 0.40f);
+     colors[ImGuiCol_ButtonHovered] = ImVec4(0.29f, 0.29f, 0.29f, 1.00f);
+     colors[ImGuiCol_ButtonActive] = ImVec4(0.13f, 0.13f, 0.13f, 1.00f);
+     colors[ImGuiCol_Header] = ImVec4(0.45f, 0.45f, 0.45f, 0.31f);
+     colors[ImGuiCol_HeaderHovered] = ImVec4(    0.55f, 0.55f, 0.55f, 0.80f);
+     colors[ImGuiCol_HeaderActive] = ImVec4(0.09f, 0.09f, 0.09f, 1.00f);
+     colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.20f);
+     colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.46f, 0.46f, 0.46f, 0.67f);
+     colors[ImGuiCol_ResizeGripActive] = ImVec4(0.17f, 0.17f, 0.17f, 0.95f);
+     colors[ImGuiCol_SeparatorActive] = ImVec4(0.42f, 0.42f, 0.42f, 1.00f);
+     colors[ImGuiCol_SeparatorHovered] = ImVec4(0.50f, 0.50f, 0.50f, 0.78f);
+     colors[ImGuiCol_TabHovered] = ImVec4(0.45f, 0.45f, 0.45f, 0.80f);
+     colors[ImGuiCol_TabActive] = ImVec4(0.28f, 0.28f, 0.28f, 1.00f);
+     colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
+     colors[ImGuiCol_DockingPreview] = ImVec4(0.51f, 0.51f, 0.51f, 0.70f);
+     colors[ImGuiCol_Tab] = ImVec4(0.21f, 0.21f, 0.21f, 0.86f);
+     colors[ImGuiCol_TabUnfocused] = ImVec4(0.15f, 0.15f, 0.15f, 0.97f);
+     colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.40f, 0.13f, 1.00f);
+     colors[ImGuiCol_TextSelectedBg] = ImVec4(0.45f, 1.00f, 0.85f, 0.35f);
 
-    style.WindowRounding = 4;
-    style.FrameRounding = 4;
-    style.ChildRounding = 3;
-    style.ScrollbarRounding = 7;
-    style.GrabRounding = 12;
-    style.TabRounding = 8;
-    style.PopupRounding = 6;
-//    float f = 0.0f;
+     style.WindowRounding = 4;
+     style.FrameRounding = 4;
+     style.ChildRounding = 3;
+     style.ScrollbarRounding = 7;
+     style.GrabRounding = 12;
+     style.TabRounding = 8;
+     style.PopupRounding = 6;
+ //    float f = 0.0f;
 #pragma endregion
 
-    ourShader.use();
-    ourShader.setInt("material.diffuse", 0);
-    ourShader.setInt("material.specular", 1);
+     ourShader.use();
+     ourShader.setInt("material.diffuse", 0);
+     ourShader.setInt("material.specular", 1);
+
+
+
 // 初始化天空盒
 #pragma region skybox init
-Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
-    float skyboxVertices[] = {
-            // positions
-            -1.0f,  1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f,  1.0f, -1.0f,
-            -1.0f,  1.0f, -1.0f,
+ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
+     float skyboxVertices[] = {
+             // positions
+             -1.0f,  1.0f, -1.0f,
+             -1.0f, -1.0f, -1.0f,
+             1.0f, -1.0f, -1.0f,
+             1.0f, -1.0f, -1.0f,
+             1.0f,  1.0f, -1.0f,
+             -1.0f,  1.0f, -1.0f,
 
-            -1.0f, -1.0f,  1.0f,
-            -1.0f, -1.0f, -1.0f,
-            -1.0f,  1.0f, -1.0f,
-            -1.0f,  1.0f, -1.0f,
-            -1.0f,  1.0f,  1.0f,
-            -1.0f, -1.0f,  1.0f,
+             -1.0f, -1.0f,  1.0f,
+             -1.0f, -1.0f, -1.0f,
+             -1.0f,  1.0f, -1.0f,
+             -1.0f,  1.0f, -1.0f,
+             -1.0f,  1.0f,  1.0f,
+             -1.0f, -1.0f,  1.0f,
 
-            1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
+             1.0f, -1.0f, -1.0f,
+             1.0f, -1.0f,  1.0f,
+             1.0f,  1.0f,  1.0f,
+             1.0f,  1.0f,  1.0f,
+             1.0f,  1.0f, -1.0f,
+             1.0f, -1.0f, -1.0f,
 
-            -1.0f, -1.0f,  1.0f,
-            -1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f, -1.0f,  1.0f,
-            -1.0f, -1.0f,  1.0f,
+             -1.0f, -1.0f,  1.0f,
+             -1.0f,  1.0f,  1.0f,
+             1.0f,  1.0f,  1.0f,
+             1.0f,  1.0f,  1.0f,
+             1.0f, -1.0f,  1.0f,
+             -1.0f, -1.0f,  1.0f,
 
-            -1.0f,  1.0f, -1.0f,
-            1.0f,  1.0f, -1.0f,
-            1.0f,  1.0f,  1.0f,
-            1.0f,  1.0f,  1.0f,
-            -1.0f,  1.0f,  1.0f,
-            -1.0f,  1.0f, -1.0f,
+             -1.0f,  1.0f, -1.0f,
+             1.0f,  1.0f, -1.0f,
+             1.0f,  1.0f,  1.0f,
+             1.0f,  1.0f,  1.0f,
+             -1.0f,  1.0f,  1.0f,
+             -1.0f,  1.0f, -1.0f,
 
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f,  1.0f,
-            1.0f, -1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f,  1.0f,
-            1.0f, -1.0f,  1.0f
-    };
-    // skybox VAO
-    unsigned int skyboxVAO, skyboxVBO;
-    glGenVertexArrays(1, &skyboxVAO);
-    glGenBuffers(1, &skyboxVBO);
-    glBindVertexArray(skyboxVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    // load textures
-    // -------------
-    unsigned int cubemapTexture = loadCubemap(faces2);
-    skyboxShader.use();
-    skyboxShader.setInt("skybox", 0);
+             -1.0f, -1.0f, -1.0f,
+             -1.0f, -1.0f,  1.0f,
+             1.0f, -1.0f, -1.0f,
+             1.0f, -1.0f, -1.0f,
+             -1.0f, -1.0f,  1.0f,
+             1.0f, -1.0f,  1.0f
+     };
+     // skybox VAO
+     unsigned int skyboxVAO, skyboxVBO;
+     glGenVertexArrays(1, &skyboxVAO);
+     glGenBuffers(1, &skyboxVBO);
+     glBindVertexArray(skyboxVAO);
+     glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+     glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+     glEnableVertexAttribArray(0);
+     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+     // load textures
+     // -------------
+     unsigned int cubemapTexture = loadCubemap(faces2);
+     skyboxShader.use();
+     skyboxShader.setInt("skybox", 0);
 #pragma endregion
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 // 循环渲染程序
@@ -386,8 +595,8 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
 
         processInput(window);
 #pragma region render model
-        // 1. 绑定自定义帧缓冲区 fbo
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+        // // 1. 绑定自定义帧缓冲区 fbo
+         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
@@ -395,66 +604,103 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
 
+        glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
         // 渲染光源
-        loadLight(ourShader, projection, view, model, ourModel);
+        loadLight(shader, projection, view, model, ourModel);
 
-        // 渲染 3D 模型
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-        loadModel(ourShader, ourModel, model, view, projection);
 
-        model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-        loadModel(ourShader, ourModel, model, view, projection);
-
-        // 渲染3D模型列表
-        for(rending& r : models) {
-            model = glm::translate(model, r.pos);
-            model = glm::scale(model, r.scale);
-            loadModel(ourShader, r.model, model, view, projection);
-        }
+//        //一渲
+//        float near_plane = 1.0f;
+//        float far_plane = 25.0f;
+//        lightPos.z = static_cast<float>(sin(glfwGetTime() * 0.5) * 3.0);
+//        glm::mat4 shadowProj = glm::perspective(glm::radians(90.0f), (float)SHADOW_WIDTH / (float)SHADOW_HEIGHT, near_plane, far_plane);
+//        std::vector<glm::mat4> shadowTransforms;
+//        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
+//        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(-1.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
+//        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+//        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.0f, 0.0f, -1.0f)));
+//        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
+//        shadowTransforms.push_back(shadowProj * glm::lookAt(lightPos, lightPos + glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, -1.0f, 0.0f)));
+//        glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+//        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+//        glClear(GL_DEPTH_BUFFER_BIT);
+//        simpleDepthShader.use();
+//        for (unsigned int i = 0; i < 6; ++i)
+//            simpleDepthShader.setMat4("shadowMatrices[" + std::to_string(i) + "]", shadowTransforms[i]);
+//        simpleDepthShader.setFloat("far_plane", far_plane);
+//        simpleDepthShader.setVec3("lightPos", lightPos);
+//
+//        //render
+//        renderScene(simpleDepthShader,models,view,projection);
+//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//
+//        //二渲
+//        glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//        shader.use();
+//        projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+//        view = camera.GetViewMatrix();
+//        shader.setMat4("projection", projection);
+//        shader.setMat4("view", view);
+//        // set lighting uniforms
+//        shader.setVec3("lightPos", lightPos);
+//        shader.setVec3("viewPos", camera.Position);
+//        bool shadows = true;
+//        shader.setInt("shadows", shadows); // enable/disable shadows by pressing 'SPACE'
+//        shader.setFloat("far_plane", far_plane);
+//        glActiveTexture(GL_TEXTURE0);
+//        glBindTexture(GL_TEXTURE_2D, woodTexture);
+//        glActiveTexture(GL_TEXTURE1);
+//        glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
+//        glUniform1i(glGetUniformLocation(shader.ID, "depthMap"), 1);
+//        // shader.setInt("depthMap", depthCubemap);
+//
+//        //render
+        renderScene(shader,models,view,projection);
 
         // 渲染雪花粒子
-        loadSnow(snowShader, VAO, texture, particles, view, projection);
+         loadSnow(snowShader, VAO, texture, particles, view, projection);
 
         // 渲染天空盒
         // 在最后渲染天空盒
-        loadSkybox(skyboxShader, skyboxVAO, cubemapTexture, view, projection);
+         loadSkybox(skyboxShader, skyboxVAO, cubemapTexture, view, projection);
 
         // 2. 解除帧缓冲区绑定，返回默认帧缓冲区
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        std::cout<<glGetError()<<std::endl;
 # pragma endregion
 
 #pragma region ImGui render
-        /***************** 渲染 ImGui 界面 ************************/
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        ImGui::DockSpaceOverViewport();
-        DrawGUI();
+         /***************** 渲染 ImGui 界面 ************************/
+         ImGui_ImplOpenGL3_NewFrame();
+         ImGui_ImplGlfw_NewFrame();
+         ImGui::NewFrame();
+         ImGui::DockSpaceOverViewport();
+         DrawGUI();
 
-        // 绘制3D渲染的界面
-        ImGui::Begin("Scene");
-        // 将 fbo 的纹理传递给 ImGui 显示
-        ImGui::Image((void*)(intptr_t)fboTexture, ImVec2(SCR_WIDTH, SCR_HEIGHT), ImVec2(0, 1), ImVec2(1, 0));
-        ImGui::End();
+         // 绘制3D渲染的界面
+         ImGui::Begin("Scene");
+         // 将 fbo 的纹理传递给 ImGui 显示
+         ImGui::Image((void*)(intptr_t)fboTexture, ImVec2(SCR_WIDTH, SCR_HEIGHT), ImVec2(0, 1), ImVec2(1, 0));
+         ImGui::End();
 
-        // 绘制底部数据展示界面
-        DrawDebugUI(camera.Position);
-        // 绘制菜单界面
-        DrawMenuUI(camera, scale, clear_color);
+         // 绘制底部数据展示界面
+         DrawDebugUI(camera.Position);
+         // 绘制菜单界面
+         DrawMenuUI(camera, scale, clear_color);
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+         ImGui::Render();
+         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-        {
-            GLFWwindow* backup_current_context = glfwGetCurrentContext();
-            ImGui::UpdatePlatformWindows();
-            ImGui::RenderPlatformWindowsDefault();
-            glfwMakeContextCurrent(backup_current_context);
-        }
+         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+         {
+             GLFWwindow* backup_current_context = glfwGetCurrentContext();
+             ImGui::UpdatePlatformWindows();
+             ImGui::RenderPlatformWindowsDefault();
+             glfwMakeContextCurrent(backup_current_context);
+         }
 # pragma endregion
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -463,39 +709,99 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
 // 程序结束后的清理
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    glDeleteVertexArrays(1, &skyboxVAO);
+    // glDeleteVertexArrays(1, &skyboxVAO);
     glfwTerminate();
     return 0;
 }
 
+unsigned int loadTexture(char const * path)
+{
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
 
-void processInput(GLFWwindow *window){
-    // 获取当前活动的ImGui窗口名称
-    ImGuiWindow* currentWindow = ImGui::GetCurrentContext()->NavWindow;
-    if (currentWindow && strcmp(currentWindow->Name, "Scene") == 0) {
-        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, true);
-        if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-            camera.ProcessKeyboard(FORWARD, deltaTime);
-        if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-            camera.ProcessKeyboard(BACKWARD, deltaTime);
-        if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-            camera.ProcessKeyboard(LEFT, deltaTime);
-        if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-            camera.ProcessKeyboard(RIGHT, deltaTime);
+    int width, height, nrComponents;
+    unsigned char *data = stbi_load(path, &width, &height, &nrComponents, 0);
+    if (data)
+    {
+        GLenum format;
+        if (nrComponents == 1)
+            format = GL_RED;
+        else if (nrComponents == 3)
+            format = GL_RGB;
+        else if (nrComponents == 4)
+            format = GL_RGBA;
 
-        if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
-        {
-            ImVec2 mouseDelta = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
-            camera.ProcessMouseMovement(mouseDelta.x, -mouseDelta.y);
-            ImGui::ResetMouseDragDelta(ImGuiMouseButton_Left);
-        }
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
 
-        float mouseWheel = ImGui::GetIO().MouseWheel;
-        if (mouseWheel != 0)
-            camera.ProcessMouseScroll(mouseWheel);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT); // for this tutorial: use GL_CLAMP_TO_EDGE to prevent semi-transparent borders. Due to interpolation it takes texels from next repeat
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        stbi_image_free(data);
     }
+    else
+    {
+        std::cout << "Texture failed to load at path: " << path << std::endl;
+        stbi_image_free(data);
+    }
+
+    return textureID;
 }
+
+ void processInput(GLFWwindow *window){
+     // 获取当前活动的ImGui窗口名称
+     ImGuiWindow* currentWindow = ImGui::GetCurrentContext()->NavWindow;
+     if (currentWindow && strcmp(currentWindow->Name, "Scene") == 0) {
+         if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+             glfwSetWindowShouldClose(window, true);
+         if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+             camera.ProcessKeyboard(FORWARD, deltaTime);
+         if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+             camera.ProcessKeyboard(BACKWARD, deltaTime);
+         if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+             camera.ProcessKeyboard(LEFT, deltaTime);
+         if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+             camera.ProcessKeyboard(RIGHT, deltaTime);
+
+         if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
+         {
+             ImVec2 mouseDelta = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
+             camera.ProcessMouseMovement(mouseDelta.x, -mouseDelta.y);
+             ImGui::ResetMouseDragDelta(ImGuiMouseButton_Left);
+         }
+
+         float mouseWheel = ImGui::GetIO().MouseWheel;
+         if (mouseWheel != 0)
+             camera.ProcessMouseScroll(mouseWheel);
+     }
+ }
+//void processInput(GLFWwindow *window)
+//{
+//    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+//        glfwSetWindowShouldClose(window, true);
+//
+//    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+//        camera.ProcessKeyboard(FORWARD, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+//        camera.ProcessKeyboard(BACKWARD, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+//        camera.ProcessKeyboard(LEFT, deltaTime);
+//    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+//        camera.ProcessKeyboard(RIGHT, deltaTime);
+//
+//    // if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !shadowsKeyPressed)
+//    // {
+//    //     shadows = !shadows;
+//    //     shadowsKeyPressed = true;
+//    // }
+//    // if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
+//    // {
+//    //     shadowsKeyPressed = false;
+//    // }
+//}
 
 
 
@@ -672,3 +978,29 @@ void loadLight(Shader& ourShader, glm::mat4 projection, glm::mat4 view, glm::mat
     model1.Draw(ourShader);
 }
 
+void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
+{
+    float xpos = static_cast<float>(xposIn);
+    float ypos = static_cast<float>(yposIn);
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+    lastX = xpos;
+    lastY = ypos;
+
+    camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
+// glfw: whenever the mouse scroll wheel scrolls, this callback is called
+// ----------------------------------------------------------------------
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    camera.ProcessMouseScroll(static_cast<float>(yoffset));
+}
