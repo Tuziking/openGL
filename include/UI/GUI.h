@@ -16,7 +16,9 @@ void DrawDebugUI(glm::vec3 position){
 
 void DrawMenuUI(Camera& camera,
                 float& scale,
-                ImVec4& backgroundColor){
+                ImVec4& backgroundColor,
+                bool& isSnow,
+                glm::vec3& lightPos){
     ImGui::Begin(u8"Menu");
     ImGui::Text("Background Color");
     ImGui::SameLine();
@@ -32,6 +34,7 @@ void DrawMenuUI(Camera& camera,
     {
         // 如果用户在调色板中选择了颜色，可以在这里处理颜色改变的逻辑
     }
+
 //    ImGui::Text(u8"scale");
 //    if (ImGui::SliderFloat("##uniqueID", &scale, -1.0f, 1.0f))
 //    {
@@ -51,7 +54,7 @@ void DrawMenuUI(Camera& camera,
     ImGui::Text(u8"position");
     // 添加三个滑块来控制camera的位置
     float cameraPosition[3] = {camera.Position.x, camera.Position.y, camera.Position.z};
-    if (ImGui::SliderFloat("X", &cameraPosition[0], -30.0f, 30.0f))
+    if (ImGui::SliderFloat("camera X", &cameraPosition[0], -30.0f, 30.0f))
     {
         // 当用户修改滑块的值时，更新camera的位置
         camera.Position.x = cameraPosition[0];
@@ -62,7 +65,7 @@ void DrawMenuUI(Camera& camera,
         camera.Position.x = 0.0f;
     }
 
-    if (ImGui::SliderFloat(u8"Y", &cameraPosition[1], -30.0f, 30.0f))
+    if (ImGui::SliderFloat(u8"camera Y", &cameraPosition[1], -30.0f, 30.0f))
     {
         camera.Position.y = cameraPosition[1];
     }
@@ -72,7 +75,7 @@ void DrawMenuUI(Camera& camera,
         camera.Position.y = 0.0f;
     }
 
-    if (ImGui::SliderFloat(u8"Z", &cameraPosition[2], -30.0f, 30.0f))
+    if (ImGui::SliderFloat(u8"camera Z", &cameraPosition[2], -30.0f, 30.0f))
     {
         camera.Position.z = cameraPosition[2];
     }
@@ -81,6 +84,52 @@ void DrawMenuUI(Camera& camera,
     {
         camera.Position.z = 3.0f;
     }
+#pragma endregion
+
+#pragma region Snow
+    ImGui::Text(u8"switch snow");
+    ImGui::SameLine();
+    // 添加一个复选框来控制是否下雪
+    if (ImGui::Checkbox(u8"##UNIQUEID", &isSnow))
+    {
+        // 当用户点击复选框时，这里的代码将被执行
+    }
+#pragma endregion
+
+#pragma region light
+    ImGui::Text("light position");
+    // 添加三个滑块来控制light的位置
+    float lightPosition[3] = {lightPos.x, lightPos.y, lightPos.z};
+    if (ImGui::SliderFloat("light X", &lightPosition[0], -30.0f, 30.0f))
+    {
+        // 当用户修改滑块的值时，更新light的位置
+        lightPos.x = lightPosition[0];
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reset lightX"))
+    {
+        lightPos.x = 0.0f;
+    }
+    if (ImGui::SliderFloat(u8"light Y", &lightPosition[1], -30.0f, 30.0f))
+    {
+        lightPos.y = lightPosition[1];
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reset lightY"))
+    {
+        lightPos.y = 0.0f;
+    }
+    if (ImGui::SliderFloat(u8"light Z", &lightPosition[2], -30.0f, 30.0f))
+    {
+        lightPos.z = lightPosition[2];
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reset lightZ"))
+    {
+        lightPos.z = 3.0f;
+    }
+
+
 #pragma endregion
     ImGui::End();
 
