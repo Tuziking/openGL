@@ -24,7 +24,9 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 unsigned int loadCubemap(vector<std::string> faces);
-
+void loadModel(Shader shader, Model model, glm::mat4 modelMatrix, glm::mat4 view, glm::mat4 projection);
+void loadSkybox(Shader shader, unsigned int skyboxVAO, unsigned int cubemapTexture, glm::mat4 view, glm::mat4 projection);
+void loadSnow(Shader shader, unsigned int VAO, unsigned int texture, std::vector<Particle>& particles, glm::mat4 view, glm::mat4 projection);
 // 窗口的宽和高
 const unsigned int SCR_WIDTH = 2000;
 const unsigned int SCR_HEIGHT = 1000;
@@ -65,7 +67,26 @@ float vertices[] = {
         -0.01f, -0.01f, -0.01f, 0.0f, 0.0f
 };
 # pragma endregion
-
+#pragma region skybox faces
+    vector<std::string> faces1
+            {
+                    "../resources/texture/skybox/px.png",
+                    "../resources/texture/skybox/nx.png",
+                    "../resources/texture/skybox/py.png",
+                    "../resources/texture/skybox/ny.png",
+                    "../resources/texture/skybox/pz.png",
+                    "../resources/texture/skybox/nz.png",
+            };
+vector<std::string> faces2
+        {
+                "../resources/texture/skybox2/xp.jpg",
+                "../resources/texture/skybox2/xn.jpg",
+                "../resources/texture/skybox2/yp.jpg",
+                "../resources/texture/skybox2/yn.jpg",
+                "../resources/texture/skybox2/zp.jpg",
+                "../resources/texture/skybox2/zn.jpg",
+        };
+#pragma endregion
 
 int main()
 {
@@ -111,7 +132,7 @@ int main()
     Model ourModel("../resources/nanosuit/nanosuit.obj");
 #pragma endregion
 
-// todo：修改了白色雪花的黑色背景
+// 雪花粒子初始化
 # pragma region particles init
 // 用于判断着色器的GLSL代码是否编译成功
     int success;
@@ -309,16 +330,7 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     // load textures
     // -------------
-    vector<std::string> faces
-            {
-                    "../resources/texture/skybox/px.png",
-                    "../resources/texture/skybox/nx.png",
-                    "../resources/texture/skybox/py.png",
-                    "../resources/texture/skybox/ny.png",
-                    "../resources/texture/skybox/pz.png",
-                    "../resources/texture/skybox/nz.png",
-            };
-    unsigned int cubemapTexture = loadCubemap(faces);
+    unsigned int cubemapTexture = loadCubemap(faces2);
     skyboxShader.use();
     skyboxShader.setInt("skybox", 0);
 #pragma endregion
@@ -338,67 +350,26 @@ Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
-
-        // 渲染 3D 模型
-        ourShader.use();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
+
+
+        // 渲染 3D 模型
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-        ourShader.setMat4("model", model);
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", view);
-        ourModel.Draw(ourShader);
+        loadModel(ourShader, ourModel, model, view, projection);
+
+        model = glm::translate(model, glm::vec3(5.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+        loadModel(ourShader, ourModel, model, view, projection);
 
         // 渲染雪花粒子
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glDepthMask(GL_FALSE); // 禁止写入深度缓冲区
-        glDepthFunc(GL_ALWAYS); // 设置深度测试函数为 GL_ALWAYS，始终通过深度测试
+        loadSnow(snowShader, VAO, texture, particles, view, projection);
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glUniform1i(glGetUniformLocation(program, "ourTexture"), 0);
-        snowShader.use();
-        snowShader.setMat4("view", view);
-        snowShader.setMat4("proj", projection);
-        particlesTmp.clear();
-        for (unsigned int i = 0; i < particles.size(); i++) {
-            glm::mat4 model1 = glm::mat4(1.0f);
-            particles[i].update(glfwGetTime());
-            model1 = glm::translate(model1, particles[i].getX());
-
-            snowShader.setMat4("model", model1);
-            if (particles[i].exist())
-                particlesTmp.push_back(particles[i]);
-            else
-                particlesTmp.push_back(Particle(glfwGetTime(), false));
-            glBindVertexArray(VAO);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-            glBindVertexArray(0);
-        }
-        particles = particlesTmp;
-        // 恢复深度测试函数和深度写入状态
-        glDepthFunc(GL_LESS);
-        glDepthMask(GL_TRUE);
-        glDisable(GL_BLEND);
-
-
-//        // 渲染天空盒
-        // draw skybox as last
-        glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
-        skyboxShader.use();
-        view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
-        skyboxShader.setMat4("view", view);
-        skyboxShader.setMat4("projection", projection);
-        // skybox cube
-        glBindVertexArray(skyboxVAO);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-        glBindVertexArray(0);
-        glDepthFunc(GL_LESS); // set depth function back to default
+        // 渲染天空盒
+        // 在最后渲染天空盒
+        loadSkybox(skyboxShader, skyboxVAO, cubemapTexture, view, projection);
 
         // 2. 解除帧缓冲区绑定，返回默认帧缓冲区
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -452,16 +423,15 @@ void processInput(GLFWwindow *window){
     // 获取当前活动的ImGui窗口名称
     ImGuiWindow* currentWindow = ImGui::GetCurrentContext()->NavWindow;
     if (currentWindow && strcmp(currentWindow->Name, "Scene") == 0) {
-        if(ImGui::IsKeyPressed(ImGuiKey_Escape)){
+        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(window, true);
-        }
-        if (ImGui::IsKeyPressed(ImGuiKey_W))
+        if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
             camera.ProcessKeyboard(FORWARD, deltaTime);
-        if (ImGui::IsKeyPressed(ImGuiKey_S))
+        if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
             camera.ProcessKeyboard(BACKWARD, deltaTime);
-        if (ImGui::IsKeyPressed(ImGuiKey_A))
+        if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
             camera.ProcessKeyboard(LEFT, deltaTime);
-        if (ImGui::IsKeyPressed(ImGuiKey_D))
+        if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
             camera.ProcessKeyboard(RIGHT, deltaTime);
 
         if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
@@ -522,3 +492,74 @@ unsigned int loadCubemap(vector<std::string> faces)
 
     return textureID;
 }
+
+void loadModel(Shader shader,
+               Model model,
+               glm::mat4 modelMatrix,
+               glm::mat4 view,
+               glm::mat4 projection){
+    shader.use();
+    shader.setMat4("model", modelMatrix);
+    shader.setMat4("view", view);
+    shader.setMat4("projection", projection);
+    model.Draw(shader);
+}
+
+void loadSkybox(Shader skyboxShader,
+                unsigned int skyboxVAO,
+                unsigned int cubemapTexture,
+                glm::mat4 view,
+                glm::mat4 projection) {
+    glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+    skyboxShader.use();
+    view = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
+    skyboxShader.setMat4("view", view);
+    skyboxShader.setMat4("projection", projection);
+    // skybox cube
+    glBindVertexArray(skyboxVAO);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
+    glDepthFunc(GL_LESS); // set depth function back to default
+}
+
+void loadSnow(Shader snowShader,
+              unsigned int VAO,
+              unsigned int texture,
+              std::vector<Particle>& particles,
+              glm::mat4 view,
+              glm::mat4 projection){
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDepthMask(GL_FALSE); // 禁止写入深度缓冲区
+        glDepthFunc(GL_ALWAYS); // 设置深度测试函数为 GL_ALWAYS，始终通过深度测试
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glUniform1i(glGetUniformLocation(program, "ourTexture"), 0);
+        snowShader.use();
+        snowShader.setMat4("view", view);
+        snowShader.setMat4("proj", projection);
+        particlesTmp.clear();
+        for (unsigned int i = 0; i < particles.size(); i++) {
+            glm::mat4 model1 = glm::mat4(1.0f);
+            particles[i].update(glfwGetTime());
+            model1 = glm::translate(model1, particles[i].getX());
+
+            snowShader.setMat4("model", model1);
+            if (particles[i].exist())
+                particlesTmp.push_back(particles[i]);
+            else
+                particlesTmp.push_back(Particle(glfwGetTime(), false));
+            glBindVertexArray(VAO);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+            glBindVertexArray(0);
+        }
+        particles = particlesTmp;
+        // 恢复深度测试函数和深度写入状态
+        glDepthFunc(GL_LESS);
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
+}
+

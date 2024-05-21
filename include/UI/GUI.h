@@ -6,6 +6,7 @@
 std::vector <int> DragList;
 
 TextEditor* te;
+
 // 绘制用户当前位置
 void DrawDebugUI(glm::vec3 position){
     ImGui::Begin("Debug Window");
@@ -13,7 +14,9 @@ void DrawDebugUI(glm::vec3 position){
     ImGui::End();
 }
 
-void DrawMenuUI(Camera& camera, float& scale, ImVec4& backgroundColor){
+void DrawMenuUI(Camera& camera,
+                float& scale,
+                ImVec4& backgroundColor){
     ImGui::Begin(u8"Menu");
     ImGui::Text("Background Color");
     ImGui::SameLine();
@@ -43,6 +46,8 @@ void DrawMenuUI(Camera& camera, float& scale, ImVec4& backgroundColor){
 //        camera.ProcessMouseScroll(50);
 //        scale = 0.0f;
 //    }
+
+#pragma region Camera
     ImGui::Text(u8"position");
     // 添加三个滑块来控制camera的位置
     float cameraPosition[3] = {camera.Position.x, camera.Position.y, camera.Position.z};
@@ -76,7 +81,10 @@ void DrawMenuUI(Camera& camera, float& scale, ImVec4& backgroundColor){
     {
         camera.Position.z = 3.0f;
     }
+#pragma endregion
     ImGui::End();
+
+
 }
 
 void DrawGUI()
