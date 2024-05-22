@@ -139,18 +139,18 @@ glm::vec3 pointLightPositions[] = {
 // program：着色器程序
 // texture：纹理
 unsigned int VAO, VBO, program, texture;
-const int PARTICLE_NUM = 1000;
+const int PARTICLE_NUM = 20000;
 // particles：存储所有粒子
 // particlesTmp：用于存储一个时间间隔后还未消亡的粒子和它们的新状态
 std::vector<Particle> particles, particlesTmp;
 // 每片雪花用三维空间中的一个正方形和其上的纹理表示，正方形分为两个三角形绘制，每行前三个实数表示顶点的坐标，后两个实数表示该点对应的纹理坐标
 float vertices[] = {
-        -0.01f, -0.01f, -0.01f, 0.0f, 0.0f,
-        0.01f, -0.01f, -0.01f, 1.0f, 0.0f,
-        0.01f, 0.01f, -0.01f, 1.0f, 1.0f,
-        0.01f, 0.01f, -0.01f, 1.0f, 1.0f,
-        -0.01f, 0.01f, -0.01f, 0.0f, 1.0f,
-        -0.01f, -0.01f, -0.01f, 0.0f, 0.0f
+        -0.1f, -0.1f, -0.1f, 0.0f, 0.0f,
+        0.1f, -0.1f, -0.1f, 1.0f, 0.0f,
+        0.1f, 0.1f, -0.1f, 1.0f, 1.0f,
+        0.1f, 0.1f, -0.1f, 1.0f, 1.0f,
+        -0.1f, 0.1f, -0.1f, 0.0f, 1.0f,
+        -0.1f, -0.1f, -0.1f, 0.0f, 0.0f
 };
 # pragma endregion
 
@@ -656,12 +656,12 @@ int main()
 //        //render
         renderScene(shader,models,view,projection);
 
-        // 渲染雪花粒子
-         loadSnow(snowShader, VAO, texture, particles, view, projection);
-
         // 渲染天空盒
         // 在最后渲染天空盒
-         loadSkybox(skyboxShader, skyboxVAO, cubemapTexture, view, projection);
+        loadSkybox(skyboxShader, skyboxVAO, cubemapTexture, view, projection);
+
+        // 渲染雪花粒子
+         loadSnow(snowShader, VAO, texture, particles, view, projection);
 
         // 2. 解除帧缓冲区绑定，返回默认帧缓冲区
          glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -885,9 +885,9 @@ void loadSnow(Shader snowShader,
               glm::mat4 view,
               glm::mat4 projection){
         glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glDepthMask(GL_FALSE); // 禁止写入深度缓冲区
-        glDepthFunc(GL_ALWAYS); // 设置深度测试函数为 GL_ALWAYS，始终通过深度测试
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glDepthMask(GL_TRUE); // 禁止写入深度缓冲区
+        glDepthFunc(GL_LESS); // 设置深度测试函数为 GL_ALWAYS，始终通过深度测试
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
@@ -905,7 +905,7 @@ void loadSnow(Shader snowShader,
             if (particles[i].exist())
                 particlesTmp.push_back(particles[i]);
             else
-                particlesTmp.push_back(Particle(glfwGetTime(), false));
+                particlesTmp.push_back(Particle(glfwGetTime(), true));
             glBindVertexArray(VAO);
             glDrawArrays(GL_TRIANGLES, 0, 36);
             glBindVertexArray(0);
