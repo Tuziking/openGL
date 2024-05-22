@@ -132,6 +132,7 @@ glm::vec3 pointLightPositions[] = {
         glm::vec3(-4.0f,  2.0f, -12.0f),
         glm::vec3( 0.0f,  0.0f, -3.0f)
 };
+glm::vec3 directLightPosition = glm::vec3(1.0,-1.0,1.0);
 
 # pragma region particles paraments
 // VAO：顶点数组对象
@@ -291,7 +292,7 @@ int main()
 
     //chair
     Model chair("../resources/models/chair/chair.obj");
-    models.push_back(rending{chair,glm::vec3(0.0f,1.1f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
+    models.push_back(rending{chair,glm::vec3(0.0f,0.77f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
     // tree
     Model tree("../resources/models/tree/tree.obj");
     models.push_back(rending{tree,glm::vec3(20.0f,0.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
@@ -332,7 +333,7 @@ int main()
  // 用于判断着色器的GLSL代码是否编译成功
      int success;
      Shader snowShader("../Shaders/snow_shader.vs", "../Shaders/snow_shader.fs");
-
+     bool isSnow = true;
      // 生成顶点数组对象和顶点缓冲对象
      glGenVertexArrays(1, &VAO);
      glGenBuffers(1, &VBO);
@@ -687,7 +688,7 @@ int main()
          // 绘制底部数据展示界面
          DrawDebugUI(camera.Position);
          // 绘制菜单界面
-         DrawMenuUI(camera, scale, clear_color);
+         DrawMenuUI(camera, scale, clear_color, isSnow, directLightPosition);
 
          ImGui::Render();
          ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

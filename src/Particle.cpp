@@ -13,7 +13,7 @@ Particle::Particle(float t0, bool init) {
     this->t0 = t0;
     // 初始位置的x和z坐标都在范围内随机生成，y坐标根据是否为初始化模式分为随机生成和指定为5两种情况
 
-    x = glm::vec3(randFloat(-50, 50), init ? randFloat(-50, 50) : 5, randFloat(-50, 50));
+    x = glm::vec3(randFloat(-30, 30), init ? randFloat(-50, 50) : 5, randFloat(-30, 30));
     // 设置初始速度向量
     v = glm::vec3(0, -1, 0);
     // 随机生成初始加速度向量
@@ -27,7 +27,7 @@ glm::vec3 Particle::getX() {
 bool Particle::exist() {
     glm::vec3 position = getX();
     if(position.x >= -20.0f && position.x <= 20.0f && position.z >= -30.0f && position.z <= 30.0f) {
-        if(position.y < 46.0f ) {
+        if(position.y < 60.0f ) {
             return false;
         }
     }

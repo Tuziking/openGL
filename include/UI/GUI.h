@@ -7,7 +7,7 @@ std::vector <int> DragList;
 
 TextEditor* te;
 
-// »æÖÆÓÃ»§µ±Ç°Î»ÖÃ
+// ç»˜åˆ¶ç”¨æˆ·å½“å‰ä½ç½®
 void DrawDebugUI(glm::vec3 position){
     ImGui::Begin("Debug Window");
     ImGui::Text("user position : (%f,%f,%f)", position.x, position.y, position.z);
@@ -16,44 +16,46 @@ void DrawDebugUI(glm::vec3 position){
 
 void DrawMenuUI(Camera& camera,
                 float& scale,
-                ImVec4& backgroundColor){
+                ImVec4& backgroundColor,
+                bool& isSnow,
+                glm::vec3 directLightPosition){
     ImGui::Begin(u8"Menu");
-    ImGui::Text("Background Color");
-    ImGui::SameLine();
-    if (ImGui::Button("Reset"))
-    {
-        // ÖØÖÃ±³¾°ÑÕÉ«µÄÖµ
-        backgroundColor = ImVec4(0.0f,0.0f,0.0f,1.0f);
-    }
-    // Ê¹ÓÃµ÷É«°åÀ´¸ü¸Ä±³¾°ÑÕÉ«
+//    ImGui::Text("Background Color");
+//    ImGui::SameLine();
+//    if (ImGui::Button("Reset"))
+//    {
+//        // é‡ç½®èƒŒæ™¯é¢œè‰²çš„å€¼
+//        backgroundColor = ImVec4(0.0f,0.0f,0.0f,1.0f);
+//    }
+    // ä½¿ç”¨è°ƒè‰²æ¿æ¥æ›´æ”¹èƒŒæ™¯é¢œè‰²
     if (ImGui::ColorPicker4("##UNIQALID", (float*)&backgroundColor,
                             ImGuiColorEditFlags_NoSidePreview | ImGuiColorEditFlags_PickerHueBar,
                             NULL))
     {
-        // Èç¹ûÓÃ»§ÔÚµ÷É«°åÖĞÑ¡ÔñÁËÑÕÉ«£¬¿ÉÒÔÔÚÕâÀï´¦ÀíÑÕÉ«¸Ä±äµÄÂß¼­
+        // å¦‚æœç”¨æˆ·åœ¨è°ƒè‰²æ¿ä¸­é€‰æ‹©äº†é¢œè‰²ï¼Œå¯ä»¥åœ¨è¿™é‡Œå¤„ç†é¢œè‰²æ”¹å˜çš„é€»è¾‘
     }
 //    ImGui::Text(u8"scale");
 //    if (ImGui::SliderFloat("##uniqueID", &scale, -1.0f, 1.0f))
 //    {
-//        // µ±ÓÃ»§»¬¶¯»¬¶¯ÌõÊ±£¬ÕâÀïµÄ´úÂë½«±»Ö´ĞĞ£¬µ÷Õû´óĞ¡
+//        // å½“ç”¨æˆ·æ»‘åŠ¨æ»‘åŠ¨æ¡æ—¶ï¼Œè¿™é‡Œçš„ä»£ç å°†è¢«æ‰§è¡Œï¼Œè°ƒæ•´å¤§å°
 //        camera.ProcessMouseScroll(scale);
 //    }
 //    ImGui::SameLine();
-//    // µ±°´Å¥±»°´ÏÂÊ±£¬ÖØÖÃscaleµÄÖµ
+//    // å½“æŒ‰é’®è¢«æŒ‰ä¸‹æ—¶ï¼Œé‡ç½®scaleçš„å€¼
 //    if (ImGui::Button("Reset"))
 //    {
-//        // ÖØÖÃcameraµÄÖµ
+//        // é‡ç½®cameraçš„å€¼
 //        camera.ProcessMouseScroll(50);
 //        scale = 0.0f;
 //    }
 
 #pragma region Camera
     ImGui::Text(u8"position");
-    // Ìí¼ÓÈı¸ö»¬¿éÀ´¿ØÖÆcameraµÄÎ»ÖÃ
+    // æ·»åŠ ä¸‰ä¸ªæ»‘å—æ¥æ§åˆ¶cameraçš„ä½ç½®
     float cameraPosition[3] = {camera.Position.x, camera.Position.y, camera.Position.z};
-    if (ImGui::SliderFloat("X", &cameraPosition[0], -30.0f, 30.0f))
+    if (ImGui::SliderFloat("X", &cameraPosition[0], -100.0f, 100.0f))
     {
-        // µ±ÓÃ»§ĞŞ¸Ä»¬¿éµÄÖµÊ±£¬¸üĞÂcameraµÄÎ»ÖÃ
+        // å½“ç”¨æˆ·ä¿®æ”¹æ»‘å—çš„å€¼æ—¶ï¼Œæ›´æ–°cameraçš„ä½ç½®
         camera.Position.x = cameraPosition[0];
     }
     ImGui::SameLine();
@@ -62,7 +64,7 @@ void DrawMenuUI(Camera& camera,
         camera.Position.x = 0.0f;
     }
 
-    if (ImGui::SliderFloat(u8"Y", &cameraPosition[1], -30.0f, 30.0f))
+    if (ImGui::SliderFloat(u8"Y", &cameraPosition[1], 5.0f, 100.0f))
     {
         camera.Position.y = cameraPosition[1];
     }
@@ -72,7 +74,7 @@ void DrawMenuUI(Camera& camera,
         camera.Position.y = 0.0f;
     }
 
-    if (ImGui::SliderFloat(u8"Z", &cameraPosition[2], -30.0f, 30.0f))
+    if (ImGui::SliderFloat(u8"Z", &cameraPosition[2], -100.0f, 100.0f))
     {
         camera.Position.z = cameraPosition[2];
     }
@@ -81,6 +83,10 @@ void DrawMenuUI(Camera& camera,
     {
         camera.Position.z = 3.0f;
     }
+
+    ImGui::Text(u8"Switch Snow");
+    ImGui::SameLine();
+    ImGui::Checkbox("##SwitchSnow", &isSnow);
 #pragma endregion
     ImGui::End();
 
@@ -89,10 +95,10 @@ void DrawMenuUI(Camera& camera,
 
 void DrawGUI()
 {
-	ImGui::Begin(u8"Menu");
+    ImGui::Begin(u8"Menu");
 
 
-	ImGui::End();
+    ImGui::End();
 
 
 //	ImGui::Begin("Debug Window");
