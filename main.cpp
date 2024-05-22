@@ -37,7 +37,7 @@ const unsigned int SCR_WIDTH = 2000;
 const unsigned int SCR_HEIGHT = 1000;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 5.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -132,7 +132,10 @@ glm::vec3 pointLightPositions[] = {
         glm::vec3(-4.0f,  2.0f, -12.0f),
         glm::vec3( 0.0f,  0.0f, -3.0f)
 };
+
 glm::vec3 directLightPosition = glm::vec3(1.0,-1.0,1.0);
+
+
 
 # pragma region particles paraments
 // VAO：顶点数组对象
@@ -140,31 +143,31 @@ glm::vec3 directLightPosition = glm::vec3(1.0,-1.0,1.0);
 // program：着色器程序
 // texture：纹理
 unsigned int VAO, VBO, program, texture;
-const int PARTICLE_NUM = 20000;
+const int PARTICLE_NUM = 1000;
 // particles：存储所有粒子
 // particlesTmp：用于存储一个时间间隔后还未消亡的粒子和它们的新状态
 std::vector<Particle> particles, particlesTmp;
 // 每片雪花用三维空间中的一个正方形和其上的纹理表示，正方形分为两个三角形绘制，每行前三个实数表示顶点的坐标，后两个实数表示该点对应的纹理坐标
 float vertices[] = {
-        -0.1f, -0.1f, -0.1f, 0.0f, 0.0f,
-        0.1f, -0.1f, -0.1f, 1.0f, 0.0f,
-        0.1f, 0.1f, -0.1f, 1.0f, 1.0f,
-        0.1f, 0.1f, -0.1f, 1.0f, 1.0f,
-        -0.1f, 0.1f, -0.1f, 0.0f, 1.0f,
-        -0.1f, -0.1f, -0.1f, 0.0f, 0.0f
+        -0.01f, -0.01f, -0.01f, 0.0f, 0.0f,
+        0.01f, -0.01f, -0.01f, 1.0f, 0.0f,
+        0.01f, 0.01f, -0.01f, 1.0f, 1.0f,
+        0.01f, 0.01f, -0.01f, 1.0f, 1.0f,
+        -0.01f, 0.01f, -0.01f, 0.0f, 1.0f,
+        -0.01f, -0.01f, -0.01f, 0.0f, 0.0f
 };
 # pragma endregion
 
 #pragma region skybox faces
-    vector<std::string> faces1
-            {
-                    "../resources/texture/skybox/px.png",
-                    "../resources/texture/skybox/nx.png",
-                    "../resources/texture/skybox/py.png",
-                    "../resources/texture/skybox/ny.png",
-                    "../resources/texture/skybox/pz.png",
-                    "../resources/texture/skybox/nz.png",
-            };
+vector<std::string> faces1
+        {
+                "../resources/texture/skybox/px.png",
+                "../resources/texture/skybox/nx.png",
+                "../resources/texture/skybox/py.png",
+                "../resources/texture/skybox/ny.png",
+                "../resources/texture/skybox/pz.png",
+                "../resources/texture/skybox/nz.png",
+        };
 vector<std::string> faces2
         {
                 "../resources/texture/skybox2/xp.jpg",
@@ -312,7 +315,7 @@ int main()
 
     //fireplace
     Model fireplace("../resources/models/fireplace/fireplace.obj");
-    models.push_back(rending{fireplace,glm::vec3(2.0f,2.0f,-5.8f),glm::vec3(0.3f,0.3f,0.3f)});
+    models.push_back(rending{fireplace,glm::vec3(2.0f,1.5f,-5.8f),glm::vec3(0.3f,0.3f,0.3f)});
 
     //rustic-cabin
     Model rustic("../resources/models/rustic-cabin/CabinRustic.obj");
@@ -330,81 +333,82 @@ int main()
 
 // 雪花粒子初始化
 # pragma region particles init
- // 用于判断着色器的GLSL代码是否编译成功
-     int success;
-     Shader snowShader("../Shaders/snow_shader.vs", "../Shaders/snow_shader.fs");
-     bool isSnow = true;
-     // 生成顶点数组对象和顶点缓冲对象
-     glGenVertexArrays(1, &VAO);
-     glGenBuffers(1, &VBO);
+    bool isSnow = true;
+    // 用于判断着色器的GLSL代码是否编译成功
+    int success;
+    Shader snowShader("../Shaders/snow_shader.vs", "../Shaders/snow_shader.fs");
 
-     // 绑定顶点数组对象
-     glBindVertexArray(VAO);
-     // 绑定顶点缓冲对象，并将顶点信息传入其中
-     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    // 生成顶点数组对象和顶点缓冲对象
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
 
-     // 按照vertices中数据的定义对顶点数组对象进行设置
-     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) 0);
-     glEnableVertexAttribArray(0);
-     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (3 * sizeof(float)));
-     glEnableVertexAttribArray(1);
+    // 绑定顶点数组对象
+    glBindVertexArray(VAO);
+    // 绑定顶点缓冲对象，并将顶点信息传入其中
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-     // width：纹理文件的宽度
-     // height：纹理文件的高度
-     // channelNum：纹理文件的颜色通道数
-     int width, height, channelNum;
-     // 纹理文件的图像数据
-     unsigned char *imageDate;
-     // 使用stb_image.h库中读取纹理文件的相关属性和图像数据
-     imageDate = stbi_load("../resources/texture/snowflower.png", &width, &height, &channelNum, STBI_rgb_alpha);
-     // 生成纹理
-     glGenTextures(1, &texture);
-     // 绑定纹理
-     glBindTexture(GL_TEXTURE_2D, texture);
-     // 设置纹理的属性
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-     // 将从文件中读取的纹理数据传入
-     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageDate);
-     glGenerateMipmap(GL_TEXTURE_2D);
+    // 按照vertices中数据的定义对顶点数组对象进行设置
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) 0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
-     stbi_image_free(imageDate);
-     // 启用OpenGL的深度检测，使绘制的图形更具真实感
-     glEnable(GL_DEPTH_TEST);
+    // width：纹理文件的宽度
+    // height：纹理文件的高度
+    // channelNum：纹理文件的颜色通道数
+    int width, height, channelNum;
+    // 纹理文件的图像数据
+    unsigned char *imageDate;
+    // 使用stb_image.h库中读取纹理文件的相关属性和图像数据
+    imageDate = stbi_load("../resources/texture/snowflower.png", &width, &height, &channelNum, STBI_rgb_alpha);
+    // 生成纹理
+    glGenTextures(1, &texture);
+    // 绑定纹理
+    glBindTexture(GL_TEXTURE_2D, texture);
+    // 设置纹理的属性
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // 将从文件中读取的纹理数据传入
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageDate);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
-     // 初始化粒子系统
-     for (unsigned int i = 0; i < PARTICLE_NUM; i++)
-         particles.push_back(Particle(glfwGetTime(), true));
+    stbi_image_free(imageDate);
+    // 启用OpenGL的深度检测，使绘制的图形更具真实感
+    glEnable(GL_DEPTH_TEST);
+
+    // 初始化粒子系统
+    for (unsigned int i = 0; i < PARTICLE_NUM; i++)
+        particles.push_back(Particle(glfwGetTime(), true));
 #pragma endregion
 
 // 导入纹理
 #pragma region texture
 
-     // 创建 FBO
-     glGenFramebuffers(1, &fbo);
-     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    // 创建 FBO
+    glGenFramebuffers(1, &fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-     // 创建 FBO 纹理
-     glGenTextures(1, &fboTexture);
-     glBindTexture(GL_TEXTURE_2D, fboTexture);
-     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture, 0);
+    // 创建 FBO 纹理
+    glGenTextures(1, &fboTexture);
+    glBindTexture(GL_TEXTURE_2D, fboTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fboTexture, 0);
 
-     // 创建 Renderbuffer 对象用于深度和模板测试
-     unsigned int rbo;
-     glGenRenderbuffers(1, &rbo);
-     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
-     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+    // 创建 Renderbuffer 对象用于深度和模板测试
+    unsigned int rbo;
+    glGenRenderbuffers(1, &rbo);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCR_WIDTH, SCR_HEIGHT);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
-     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-         std::cout << "Framebuffer is not complete!" << std::endl;
-     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std::cout << "Framebuffer is not complete!" << std::endl;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 #pragma endregion
 
 #pragma region shade into
@@ -456,132 +460,132 @@ int main()
 
 // 初始化ImGui
 #pragma region ImGui init
-     IMGUI_CHECKVERSION();
-     ImGui::CreateContext(nullptr);
-     // 获取 io, 设置ImGui的内容
-     ImGuiIO& io = ImGui::GetIO();
-     (void)io;
-     io.Fonts->AddFontFromFileTTF("../resources/fonts/kaiu.ttf", 24, nullptr, io.Fonts->GetGlyphRangesChineseFull());
-     //允許停靠
-     io.ConfigFlags  |= ImGuiConfigFlags_DockingEnable;
-     //視口設置無裝飾
-     io.ConfigFlags |= ImGuiViewportFlags_NoDecoration;
-     //允許視口停靠
-     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-     //停靠於背景
-     io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext(nullptr);
+    // 获取 io, 设置ImGui的内容
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    io.Fonts->AddFontFromFileTTF("../resources/fonts/kaiu.ttf", 24, nullptr, io.Fonts->GetGlyphRangesChineseFull());
+    //允許停靠
+    io.ConfigFlags  |= ImGuiConfigFlags_DockingEnable;
+    //視口設置無裝飾
+    io.ConfigFlags |= ImGuiViewportFlags_NoDecoration;
+    //允許視口停靠
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+    //停靠於背景
+    io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
 
 
-     ImGui_ImplGlfw_InitForOpenGL(window, true);
-     ImGui_ImplOpenGL3_Init(glsl_version);
-     ImGui::StyleColorsDark();
-     ImGuiStyle &style = ImGui::GetStyle();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
+    ImGui::StyleColorsDark();
+    ImGuiStyle &style = ImGui::GetStyle();
 
-     ImVec4* colors = style.Colors;
-     colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.16f, 0.17f, 1.00f);
-     colors[ImGuiCol_FrameBgHovered] = ImVec4(0.37f, 0.36f, 0.36f, 102.00f);
-     colors[ImGuiCol_FrameBgActive] = ImVec4(0.10f, 0.10f, 0.10f, 171.00f);
-     colors[ImGuiCol_TitleBgActive] = ImVec4(0.20f, 0.20f, 0.20f, 255.00f);
-     colors[ImGuiCol_CheckMark] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
-     colors[ImGuiCol_SliderGrab] = ImVec4(0.64f, 0.64f, 0.64f, 1.00f);
-     colors[ImGuiCol_SliderGrabActive] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
-     colors[ImGuiCol_Button] = ImVec4(0.22f, 0.22f, 0.22f, 0.40f);
-     colors[ImGuiCol_ButtonHovered] = ImVec4(0.29f, 0.29f, 0.29f, 1.00f);
-     colors[ImGuiCol_ButtonActive] = ImVec4(0.13f, 0.13f, 0.13f, 1.00f);
-     colors[ImGuiCol_Header] = ImVec4(0.45f, 0.45f, 0.45f, 0.31f);
-     colors[ImGuiCol_HeaderHovered] = ImVec4(    0.55f, 0.55f, 0.55f, 0.80f);
-     colors[ImGuiCol_HeaderActive] = ImVec4(0.09f, 0.09f, 0.09f, 1.00f);
-     colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.20f);
-     colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.46f, 0.46f, 0.46f, 0.67f);
-     colors[ImGuiCol_ResizeGripActive] = ImVec4(0.17f, 0.17f, 0.17f, 0.95f);
-     colors[ImGuiCol_SeparatorActive] = ImVec4(0.42f, 0.42f, 0.42f, 1.00f);
-     colors[ImGuiCol_SeparatorHovered] = ImVec4(0.50f, 0.50f, 0.50f, 0.78f);
-     colors[ImGuiCol_TabHovered] = ImVec4(0.45f, 0.45f, 0.45f, 0.80f);
-     colors[ImGuiCol_TabActive] = ImVec4(0.28f, 0.28f, 0.28f, 1.00f);
-     colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
-     colors[ImGuiCol_DockingPreview] = ImVec4(0.51f, 0.51f, 0.51f, 0.70f);
-     colors[ImGuiCol_Tab] = ImVec4(0.21f, 0.21f, 0.21f, 0.86f);
-     colors[ImGuiCol_TabUnfocused] = ImVec4(0.15f, 0.15f, 0.15f, 0.97f);
-     colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.40f, 0.13f, 1.00f);
-     colors[ImGuiCol_TextSelectedBg] = ImVec4(0.45f, 1.00f, 0.85f, 0.35f);
+    ImVec4* colors = style.Colors;
+    colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.16f, 0.17f, 1.00f);
+    colors[ImGuiCol_FrameBgHovered] = ImVec4(0.37f, 0.36f, 0.36f, 102.00f);
+    colors[ImGuiCol_FrameBgActive] = ImVec4(0.10f, 0.10f, 0.10f, 171.00f);
+    colors[ImGuiCol_TitleBgActive] = ImVec4(0.20f, 0.20f, 0.20f, 255.00f);
+    colors[ImGuiCol_CheckMark] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+    colors[ImGuiCol_SliderGrab] = ImVec4(0.64f, 0.64f, 0.64f, 1.00f);
+    colors[ImGuiCol_SliderGrabActive] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
+    colors[ImGuiCol_Button] = ImVec4(0.22f, 0.22f, 0.22f, 0.40f);
+    colors[ImGuiCol_ButtonHovered] = ImVec4(0.29f, 0.29f, 0.29f, 1.00f);
+    colors[ImGuiCol_ButtonActive] = ImVec4(0.13f, 0.13f, 0.13f, 1.00f);
+    colors[ImGuiCol_Header] = ImVec4(0.45f, 0.45f, 0.45f, 0.31f);
+    colors[ImGuiCol_HeaderHovered] = ImVec4(    0.55f, 0.55f, 0.55f, 0.80f);
+    colors[ImGuiCol_HeaderActive] = ImVec4(0.09f, 0.09f, 0.09f, 1.00f);
+    colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.20f);
+    colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.46f, 0.46f, 0.46f, 0.67f);
+    colors[ImGuiCol_ResizeGripActive] = ImVec4(0.17f, 0.17f, 0.17f, 0.95f);
+    colors[ImGuiCol_SeparatorActive] = ImVec4(0.42f, 0.42f, 0.42f, 1.00f);
+    colors[ImGuiCol_SeparatorHovered] = ImVec4(0.50f, 0.50f, 0.50f, 0.78f);
+    colors[ImGuiCol_TabHovered] = ImVec4(0.45f, 0.45f, 0.45f, 0.80f);
+    colors[ImGuiCol_TabActive] = ImVec4(0.28f, 0.28f, 0.28f, 1.00f);
+    colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
+    colors[ImGuiCol_DockingPreview] = ImVec4(0.51f, 0.51f, 0.51f, 0.70f);
+    colors[ImGuiCol_Tab] = ImVec4(0.21f, 0.21f, 0.21f, 0.86f);
+    colors[ImGuiCol_TabUnfocused] = ImVec4(0.15f, 0.15f, 0.15f, 0.97f);
+    colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.40f, 0.13f, 1.00f);
+    colors[ImGuiCol_TextSelectedBg] = ImVec4(0.45f, 1.00f, 0.85f, 0.35f);
 
-     style.WindowRounding = 4;
-     style.FrameRounding = 4;
-     style.ChildRounding = 3;
-     style.ScrollbarRounding = 7;
-     style.GrabRounding = 12;
-     style.TabRounding = 8;
-     style.PopupRounding = 6;
- //    float f = 0.0f;
+    style.WindowRounding = 4;
+    style.FrameRounding = 4;
+    style.ChildRounding = 3;
+    style.ScrollbarRounding = 7;
+    style.GrabRounding = 12;
+    style.TabRounding = 8;
+    style.PopupRounding = 6;
+    //    float f = 0.0f;
 #pragma endregion
 
-     ourShader.use();
-     ourShader.setInt("material.diffuse", 0);
-     ourShader.setInt("material.specular", 1);
+    ourShader.use();
+    ourShader.setInt("material.diffuse", 0);
+    ourShader.setInt("material.specular", 1);
 
 
 
 // 初始化天空盒
 #pragma region skybox init
- Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
-     float skyboxVertices[] = {
-             // positions
-             -1.0f,  1.0f, -1.0f,
-             -1.0f, -1.0f, -1.0f,
-             1.0f, -1.0f, -1.0f,
-             1.0f, -1.0f, -1.0f,
-             1.0f,  1.0f, -1.0f,
-             -1.0f,  1.0f, -1.0f,
+    Shader skyboxShader("../Shaders/skybox.vs", "../Shaders/skybox.fs");
+    float skyboxVertices[] = {
+            // positions
+            -1.0f,  1.0f, -1.0f,
+            -1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
 
-             -1.0f, -1.0f,  1.0f,
-             -1.0f, -1.0f, -1.0f,
-             -1.0f,  1.0f, -1.0f,
-             -1.0f,  1.0f, -1.0f,
-             -1.0f,  1.0f,  1.0f,
-             -1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
 
-             1.0f, -1.0f, -1.0f,
-             1.0f, -1.0f,  1.0f,
-             1.0f,  1.0f,  1.0f,
-             1.0f,  1.0f,  1.0f,
-             1.0f,  1.0f, -1.0f,
-             1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
 
-             -1.0f, -1.0f,  1.0f,
-             -1.0f,  1.0f,  1.0f,
-             1.0f,  1.0f,  1.0f,
-             1.0f,  1.0f,  1.0f,
-             1.0f, -1.0f,  1.0f,
-             -1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
+            -1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f, -1.0f,  1.0f,
+            -1.0f, -1.0f,  1.0f,
 
-             -1.0f,  1.0f, -1.0f,
-             1.0f,  1.0f, -1.0f,
-             1.0f,  1.0f,  1.0f,
-             1.0f,  1.0f,  1.0f,
-             -1.0f,  1.0f,  1.0f,
-             -1.0f,  1.0f, -1.0f,
+            -1.0f,  1.0f, -1.0f,
+            1.0f,  1.0f, -1.0f,
+            1.0f,  1.0f,  1.0f,
+            1.0f,  1.0f,  1.0f,
+            -1.0f,  1.0f,  1.0f,
+            -1.0f,  1.0f, -1.0f,
 
-             -1.0f, -1.0f, -1.0f,
-             -1.0f, -1.0f,  1.0f,
-             1.0f, -1.0f, -1.0f,
-             1.0f, -1.0f, -1.0f,
-             -1.0f, -1.0f,  1.0f,
-             1.0f, -1.0f,  1.0f
-     };
-     // skybox VAO
-     unsigned int skyboxVAO, skyboxVBO;
-     glGenVertexArrays(1, &skyboxVAO);
-     glGenBuffers(1, &skyboxVBO);
-     glBindVertexArray(skyboxVAO);
-     glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-     glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
-     glEnableVertexAttribArray(0);
-     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-     // load textures
-     // -------------
-     unsigned int cubemapTexture = loadCubemap(faces2);
-     skyboxShader.use();
-     skyboxShader.setInt("skybox", 0);
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f,  1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f,  1.0f,
+            1.0f, -1.0f,  1.0f
+    };
+    // skybox VAO
+    unsigned int skyboxVAO, skyboxVBO;
+    glGenVertexArrays(1, &skyboxVAO);
+    glGenBuffers(1, &skyboxVBO);
+    glBindVertexArray(skyboxVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    // load textures
+    // -------------
+    unsigned int cubemapTexture = loadCubemap(faces1);
+    skyboxShader.use();
+    skyboxShader.setInt("skybox", 0);
 #pragma endregion
     ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
 // 循环渲染程序
@@ -595,11 +599,11 @@ int main()
         processInput(window);
 #pragma region render model
         // // 1. 绑定自定义帧缓冲区 fbo
-         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10000.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
 
@@ -657,49 +661,52 @@ int main()
 //        //render
         renderScene(shader,models,view,projection);
 
+        // 渲染雪花粒子
+        if (isSnow){
+            loadSnow(snowShader, VAO, texture, particles, view, projection);
+        }
+
+
         // 渲染天空盒
         // 在最后渲染天空盒
         loadSkybox(skyboxShader, skyboxVAO, cubemapTexture, view, projection);
 
-        // 渲染雪花粒子
-         loadSnow(snowShader, VAO, texture, particles, view, projection);
-
         // 2. 解除帧缓冲区绑定，返回默认帧缓冲区
-         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         std::cout<<glGetError()<<std::endl;
 # pragma endregion
 
 #pragma region ImGui render
-         /***************** 渲染 ImGui 界面 ************************/
-         ImGui_ImplOpenGL3_NewFrame();
-         ImGui_ImplGlfw_NewFrame();
-         ImGui::NewFrame();
-         ImGui::DockSpaceOverViewport();
-         DrawGUI();
+        /***************** 渲染 ImGui 界面 ************************/
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        ImGui::DockSpaceOverViewport();
+        DrawGUI();
 
-         // 绘制3D渲染的界面
-         ImGui::Begin("Scene");
-         // 将 fbo 的纹理传递给 ImGui 显示
-         ImGui::Image((void*)(intptr_t)fboTexture, ImVec2(SCR_WIDTH, SCR_HEIGHT), ImVec2(0, 1), ImVec2(1, 0));
-         ImGui::End();
+        // 绘制3D渲染的界面
+        ImGui::Begin("Scene");
+        // 将 fbo 的纹理传递给 ImGui 显示
+        ImGui::Image((void*)(intptr_t)fboTexture, ImVec2(SCR_WIDTH, SCR_HEIGHT), ImVec2(0, 1), ImVec2(1, 0));
+        ImGui::End();
 
-         // 绘制底部数据展示界面
-         DrawDebugUI(camera.Position);
-         // 绘制菜单界面
-         DrawMenuUI(camera, scale, clear_color, isSnow, directLightPosition);
+        // 绘制底部数据展示界面
+        DrawDebugUI(camera.Position);
+        // 绘制菜单界面
+        DrawMenuUI(camera, scale, clear_color, isSnow, directLightPosition);
 
-         ImGui::Render();
-         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-         {
-             GLFWwindow* backup_current_context = glfwGetCurrentContext();
-             ImGui::UpdatePlatformWindows();
-             ImGui::RenderPlatformWindowsDefault();
-             glfwMakeContextCurrent(backup_current_context);
-         }
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow* backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
 # pragma endregion
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -750,33 +757,33 @@ unsigned int loadTexture(char const * path)
     return textureID;
 }
 
- void processInput(GLFWwindow *window){
-     // 获取当前活动的ImGui窗口名称
-     ImGuiWindow* currentWindow = ImGui::GetCurrentContext()->NavWindow;
-     if (currentWindow && strcmp(currentWindow->Name, "Scene") == 0) {
-         if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-             glfwSetWindowShouldClose(window, true);
-         if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-             camera.ProcessKeyboard(FORWARD, deltaTime);
-         if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-             camera.ProcessKeyboard(BACKWARD, deltaTime);
-         if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-             camera.ProcessKeyboard(LEFT, deltaTime);
-         if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-             camera.ProcessKeyboard(RIGHT, deltaTime);
+void processInput(GLFWwindow *window){
+    // 获取当前活动的ImGui窗口名称
+    ImGuiWindow* currentWindow = ImGui::GetCurrentContext()->NavWindow;
+    if (currentWindow && strcmp(currentWindow->Name, "Scene") == 0) {
+        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, true);
+        if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+            camera.ProcessKeyboard(FORWARD, deltaTime);
+        if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+            camera.ProcessKeyboard(BACKWARD, deltaTime);
+        if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+            camera.ProcessKeyboard(LEFT, deltaTime);
+        if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+            camera.ProcessKeyboard(RIGHT, deltaTime);
 
-         if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
-         {
-             ImVec2 mouseDelta = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
-             camera.ProcessMouseMovement(mouseDelta.x, -mouseDelta.y);
-             ImGui::ResetMouseDragDelta(ImGuiMouseButton_Left);
-         }
+        if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
+        {
+            ImVec2 mouseDelta = ImGui::GetMouseDragDelta(ImGuiMouseButton_Left);
+            camera.ProcessMouseMovement(mouseDelta.x, -mouseDelta.y);
+            ImGui::ResetMouseDragDelta(ImGuiMouseButton_Left);
+        }
 
-         float mouseWheel = ImGui::GetIO().MouseWheel;
-         if (mouseWheel != 0)
-             camera.ProcessMouseScroll(mouseWheel);
-     }
- }
+        float mouseWheel = ImGui::GetIO().MouseWheel;
+        if (mouseWheel != 0)
+            camera.ProcessMouseScroll(mouseWheel);
+    }
+}
 //void processInput(GLFWwindow *window)
 //{
 //    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -885,44 +892,44 @@ void loadSnow(Shader snowShader,
               std::vector<Particle>& particles,
               glm::mat4 view,
               glm::mat4 projection){
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-        glDepthMask(GL_TRUE); // 禁止写入深度缓冲区
-        glDepthFunc(GL_LESS); // 设置深度测试函数为 GL_ALWAYS，始终通过深度测试
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDepthMask(GL_FALSE); // 禁止写入深度缓冲区
+    glDepthFunc(GL_ALWAYS); // 设置深度测试函数为 GL_ALWAYS，始终通过深度测试
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glUniform1i(glGetUniformLocation(program, "ourTexture"), 0);
-        snowShader.use();
-        snowShader.setMat4("view", view);
-        snowShader.setMat4("proj", projection);
-        particlesTmp.clear();
-        for (unsigned int i = 0; i < particles.size(); i++) {
-            glm::mat4 model1 = glm::mat4(1.0f);
-            particles[i].update(glfwGetTime());
-            model1 = glm::translate(model1, particles[i].getX());
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glUniform1i(glGetUniformLocation(program, "ourTexture"), 0);
+    snowShader.use();
+    snowShader.setMat4("view", view);
+    snowShader.setMat4("proj", projection);
+    particlesTmp.clear();
+    for (unsigned int i = 0; i < particles.size(); i++) {
+        glm::mat4 model1 = glm::mat4(1.0f);
+        particles[i].update(glfwGetTime());
+        model1 = glm::translate(model1, particles[i].getX());
 
-            snowShader.setMat4("model", model1);
-            if (particles[i].exist())
-                particlesTmp.push_back(particles[i]);
-            else
-                particlesTmp.push_back(Particle(glfwGetTime(), true));
-            glBindVertexArray(VAO);
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-            glBindVertexArray(0);
-        }
-        particles = particlesTmp;
-        // 恢复深度测试函数和深度写入状态
-        glDepthFunc(GL_LESS);
-        glDepthMask(GL_TRUE);
-        glDisable(GL_BLEND);
+        snowShader.setMat4("model", model1);
+        if (particles[i].exist())
+            particlesTmp.push_back(particles[i]);
+        else
+            particlesTmp.push_back(Particle(glfwGetTime(), false));
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
+    }
+    particles = particlesTmp;
+    // 恢复深度测试函数和深度写入状态
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
+    glDisable(GL_BLEND);
 }
 
 void loadLight(Shader& ourShader, glm::mat4 projection, glm::mat4 view, glm::mat4 model, Model model1){
     ourShader.use();
     ourShader.setVec3("viewPos", camera.Position);
     ourShader.setFloat("material.shininess", 32.0f);
-    ourShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
+    ourShader.setVec3("dirLight.direction", directLightPosition.x, directLightPosition.y, directLightPosition.z);
     ourShader.setVec3("dirLight.ambient", 0.2f, 0.2f, 0.2f);
     ourShader.setVec3("dirLight.diffuse", 0.8f, 0.8f, 0.8f);
     ourShader.setVec3("dirLight.specular", 1.5f, 1.5f, 1.5f);
