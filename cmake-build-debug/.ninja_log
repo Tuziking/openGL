@@ -1,0 +1,26 @@
+# ninja log v5
+9	3533	7379866543924767	CMakeFiles/openGL.dir/main.cpp.obj	f966c2c0c75f031b
+3	260	7379762597896235	build.ninja	242035676078ace2
+3534	4329	7379866551901774	openGL.exe	9268d335be74e397
+35	2548	7378133340491946	CMakeFiles/openGL.dir/include/imgui/imgui_draw.cpp.obj	5f4c6f4af674b216
+23	1423	7379762612445485	CMakeFiles/openGL.dir/include/imgUI/imgui_demo.cpp.obj	195bd86fa625a351
+13	1514	7379762613414383	CMakeFiles/openGL.dir/src/glad.c.obj	a360642abe677b6d
+38	1844	7379762616684406	CMakeFiles/openGL.dir/include/imgUI/imgui_tables.cpp.obj	1ec2b667436395f1
+28	2272	7378936862710558	CMakeFiles/test_program.dir/src/Particle.cpp.obj	50c77e0669535ad7
+26	2256	7379762620826208	CMakeFiles/openGL.dir/include/imgUI/imgui_draw.cpp.obj	3bb82cbf3e567d57
+42	2483	7379762623094277	CMakeFiles/openGL.dir/include/imgUI/imgui_widgets.cpp.obj	32c8debdb5b16f3e
+30	2016	7379762618440097	CMakeFiles/openGL.dir/include/imgUI/imgui_impl_glfw.cpp.obj	eee1b59f412f25f6
+49	1584	7378133330867197	CMakeFiles/openGL.dir/include/imgui/imgui_impl_opengl3.cpp.obj	14ee38f993abf27e
+20	3676	7379762634946660	CMakeFiles/openGL.dir/include/imgUI/imgui.cpp.obj	4d76071f2abd545d
+34	1421	7379762612474382	CMakeFiles/openGL.dir/include/imgUI/imgui_impl_opengl3.cpp.obj	c616daeb66d0c0a6
+30	1718	7378133332192450	CMakeFiles/openGL.dir/include/imgui/imgui_demo.cpp.obj	cd7926e9aac5fced
+58	2103	7378133336033534	CMakeFiles/openGL.dir/include/imgui/imgui_tables.cpp.obj	aa1ad28bb02b7b4d
+41	2333	7378133338362376	CMakeFiles/openGL.dir/include/imgui/imgui_impl_glfw.cpp.obj	8711f7c022ca1506
+63	2779	7378133342800284	CMakeFiles/openGL.dir/include/imgui/imgui_widgets.cpp.obj	8c7a72e6ec12f457
+24	4117	7378133356130997	CMakeFiles/openGL.dir/include/imgui/imgui.cpp.obj	702a39474a6aa9df
+12	3036	7378964783730256	CMakeFiles/test_program.dir/test/main.cpp.obj	2deb38dd5c147e24
+9	1014	7378919896521344	CMakeFiles/test_program.dir/src/glad.c.obj	d75815c424d44396
+3037	3216	7378964785499952	test_program.exe	77837efe1ab246a6
+46	2947	7379762627741519	CMakeFiles/openGL.dir/src/Particle.cpp.obj	66df70e4db61d3c4
+25	3589	7379868934369697	CMakeFiles/openGL.dir/main.cpp.obj	f966c2c0c75f031b
+3589	4356	7379868942016445	openGL.exe	9268d335be74e397

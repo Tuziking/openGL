@@ -1,0 +1,3 @@
+"F:\CLion 2024.1.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\openGL.dir/objects.a
+"F:\CLion 2024.1.1\bin\mingw\bin\ar.exe" qc CMakeFiles\openGL.dir/objects.a @CMakeFiles\openGL.dir\objects1.rsp
+"F:\CLion 2024.1.1\bin\mingw\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\openGL.dir/objects.a -Wl,--no-whole-archive -o openGL.exe -Wl,--out-implib,libopenGL.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\openGL.dir\linkLibs.rsp

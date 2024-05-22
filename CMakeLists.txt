@@ -7,10 +7,10 @@ set(CMAKE_CXX_STANDARD 17)
 aux_source_directory(${PROJECT_SOURCE_DIR}/include/imgUI IMGUI_SRC)
 
 add_executable(openGL
-        src/glad.c 
-        main.cpp
+        src/glad.c
         ${IMGUI_SRC}
         src/Particle.cpp
+        main.cpp
 )
 add_executable(test_program
         src/glad.c

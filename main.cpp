@@ -133,8 +133,6 @@ glm::vec3 pointLightPositions[] = {
         glm::vec3( 0.0f,  0.0f, -3.0f)
 };
 
-
-
 # pragma region particles paraments
 // VAO：顶点数组对象
 // VBO：顶点缓冲对象
@@ -289,7 +287,7 @@ int main()
 
     //land
     Model land("../resources/models/land/land.obj");
-    models.push_back(rending{land,  glm::vec3(-60.0f,0.0f,-10.0f),glm::vec3(1000.0f,1000.0f,1000.0f)});
+    models.push_back(rending{land,  glm::vec3(-60.0f,0.0f,-10.0f),glm::vec3(100.0f,100.0f,100.0f)});
 
     //chair
     Model chair("../resources/models/chair/chair.obj");
@@ -317,7 +315,7 @@ int main()
 
     //rustic-cabin
     Model rustic("../resources/models/rustic-cabin/CabinRustic.obj");
-    models.push_back(rending{rustic,glm::vec3(0.0f,-3.0f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
+    models.push_back(rending{rustic,glm::vec3(0.0f,-1.5f,0.0f),glm::vec3(1.0f,1.0f,1.0f)});
 
     //snowman
     Model snowman("../resources/models/snowman/snowman.obj");
@@ -600,7 +598,7 @@ int main()
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 1000.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
 
