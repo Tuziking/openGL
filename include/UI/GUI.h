@@ -6,11 +6,16 @@
 std::vector <int> DragList;
 
 TextEditor* te;
-
+float currentTime;
 // 绘制用户当前位置
 void DrawDebugUI(glm::vec3 position){
     ImGui::Begin("Debug Window");
+    ImGui::SetWindowFontScale(1.5f); // 增加文本大小的缩放比例
+    ImGui::Text("Welcome to the Snow World!");
+    ImGui::Separator();
+    ImGui::SetWindowFontScale(1.0f); // 增加文本大小的缩放比例
     ImGui::Text("user position : (%f,%f,%f)", position.x, position.y, position.z);
+    ImGui::Text("current time : %f : 00", (int)currentTime);
     ImGui::End();
 }
 
@@ -18,39 +23,12 @@ void DrawMenuUI(Camera& camera,
                 float& scale,
                 ImVec4& backgroundColor,
                 bool& isSnow,
-                glm::vec3 directLightPosition){
+                glm::vec3& directLightPosition){
     ImGui::Begin(u8"Menu");
-//    ImGui::Text("Background Color");
-//    ImGui::SameLine();
-//    if (ImGui::Button("Reset"))
-//    {
-//        // 重置背景颜色的值
-//        backgroundColor = ImVec4(0.0f,0.0f,0.0f,1.0f);
-//    }
-    // 使用调色板来更改背景颜色
-    if (ImGui::ColorPicker4("##UNIQALID", (float*)&backgroundColor,
-                            ImGuiColorEditFlags_NoSidePreview | ImGuiColorEditFlags_PickerHueBar,
-                            NULL))
-    {
-        // 如果用户在调色板中选择了颜色，可以在这里处理颜色改变的逻辑
-    }
-//    ImGui::Text(u8"scale");
-//    if (ImGui::SliderFloat("##uniqueID", &scale, -1.0f, 1.0f))
-//    {
-//        // 当用户滑动滑动条时，这里的代码将被执行，调整大小
-//        camera.ProcessMouseScroll(scale);
-//    }
-//    ImGui::SameLine();
-//    // 当按钮被按下时，重置scale的值
-//    if (ImGui::Button("Reset"))
-//    {
-//        // 重置camera的值
-//        camera.ProcessMouseScroll(50);
-//        scale = 0.0f;
-//    }
 
 #pragma region Camera
-    ImGui::Text(u8"position");
+    float time = 0;
+    ImGui::Text(u8"camera position");
     // 添加三个滑块来控制camera的位置
     float cameraPosition[3] = {camera.Position.x, camera.Position.y, camera.Position.z};
     if (ImGui::SliderFloat("X", &cameraPosition[0], -100.0f, 100.0f))
@@ -84,9 +62,47 @@ void DrawMenuUI(Camera& camera,
         camera.Position.z = 3.0f;
     }
 
+    ImGui::Text("directLight position");
+    float sumPosition[3] = {directLightPosition.x, directLightPosition.y, directLightPosition.z};
+    if (ImGui::SliderFloat("sun X", &sumPosition[0], -100.0f, 100.0f))
+    {
+        // 当用户修改滑块的值时，更新camera的位置
+        directLightPosition.x = sumPosition[0];
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reset sunX"))
+    {
+        directLightPosition.x = 0.0f;
+    }
+
+    if (ImGui::SliderFloat("sun Y", &sumPosition[1], -100.0f, 100.0f)){
+        directLightPosition.y = sumPosition[1];
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reset sunY")){
+        directLightPosition.y = 0.0f;
+    }
+
+    if (ImGui::SliderFloat("sun Z", &sumPosition[2], -100.0f, 100.0f)){
+        directLightPosition.z = sumPosition[2];
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reset sunZ")){
+        directLightPosition.z = 0.0f;
+    }
+
+
+    // 模拟24小时 太阳的圆周运动
+    ImGui::Text("time");
+    if (ImGui::SliderFloat("time", &currentTime, 0.0f, 24.0f)){
+        directLightPosition.x = 100.0f * cos(currentTime / 24.0f * 2 * 3.1415926);
+        directLightPosition.y = 100.0f * sin(currentTime / 24.0f * 2 * 3.1415926);
+    }
+
     ImGui::Text(u8"Switch Snow");
     ImGui::SameLine();
     ImGui::Checkbox("##SwitchSnow", &isSnow);
+
 #pragma endregion
     ImGui::End();
 
