@@ -79,6 +79,12 @@ public:
         if (Position.y < 5.0f){
             Position.y = 5.0f;
         }
+        Position.x > 100.0f ? 100.0f : Position.x;
+        Position.x < -100.0f ? -100.0f : Position.x;
+
+        Position.z > 100.0f ? 100.0f : Position.z;
+        Position.z < -100.0f ? -100.0f : Position.z;
+
     }
 
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
