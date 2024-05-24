@@ -657,6 +657,7 @@ int main()
 //        //render
         renderScene(shader,models,view,projection);
 
+
         // 渲染天空盒
         // 在最后渲染天空盒
         loadSkybox(skyboxShader, skyboxVAO, cubemapTexture, view, projection);

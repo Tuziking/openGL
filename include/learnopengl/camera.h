@@ -79,11 +79,12 @@ public:
         if (Position.y < 5.0f){
             Position.y = 5.0f;
         }
-        Position.x > 100.0f ? 100.0f : Position.x;
-        Position.x < -100.0f ? -100.0f : Position.x;
+        // 限制x轴和z轴的值
+        Position.x = Position.x > 100.0f ? 100.0f : Position.x;
+        Position.x = Position.x < -100.0f ? -100.0f : Position.x;
 
-        Position.z > 100.0f ? 100.0f : Position.z;
-        Position.z < -100.0f ? -100.0f : Position.z;
+        Position.z = Position.z > 100.0f ? 100.0f : Position.z;
+        Position.z = Position.z < -100.0f ? -100.0f : Position.z;
 
     }
 

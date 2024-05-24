@@ -15,7 +15,7 @@ void DrawDebugUI(glm::vec3 position){
     ImGui::Separator();
     ImGui::SetWindowFontScale(1.0f); // 增加文本大小的缩放比例
     ImGui::Text("user position : (%f,%f,%f)", position.x, position.y, position.z);
-    ImGui::Text("current time : %f : 00", (int)currentTime);
+    ImGui::Text("current time : %d : 00", (int)currentTime);
     ImGui::End();
 }
 
